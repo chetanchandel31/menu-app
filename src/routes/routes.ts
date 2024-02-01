@@ -1,7 +1,7 @@
 export const routes = {
-  habits: {
-    path: "/habits",
-    name: "Habits manager",
+  home: {
+    path: "/home",
+    name: "Home",
   },
   auth_login: {
     path: "/auth/login",

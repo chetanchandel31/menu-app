@@ -9,7 +9,7 @@ export default function MuiThemeProvider({
 }) {
   const theme = createTheme({
     palette: {
-      mode: "dark",
+      // mode: "dark",
     },
     components: {
       MuiTypography: {
