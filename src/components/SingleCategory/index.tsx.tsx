@@ -1,7 +1,6 @@
-import CategoryName from "@/components/CategoryName";
-import FoodMenuItem from "@/components/FoodMenuItem";
+import FoodMenuItem from "@/components/SingleCategory/FoodMenuItem";
 import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 type Props = {
   category: (typeof CATEGORY_MENU_ITEMS)[number];
@@ -20,7 +19,17 @@ export default function SingleCategory({ category, categoryIndex }: Props) {
       <Grid item xs={12} md={6}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <CategoryName>{category.categoryName}</CategoryName>
+            <Typography
+              fontWeight={700}
+              fontSize={40}
+              sx={{
+                color: "#fff",
+                fontFamily: "trend-sans-w00-four,sans-serif",
+              }}
+              variant="h6"
+            >
+              {category.categoryName}
+            </Typography>
           </Grid>
 
           {category.menuItems.map((menuItem) => (

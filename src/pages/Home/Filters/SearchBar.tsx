@@ -23,8 +23,9 @@ export default function SearchBar({}: Props) {
       fullWidth
       name="Search-food-item"
       InputProps={{
-        style: {
+        sx: {
           backgroundColor: "#fff",
+          borderRadius: 2,
         },
         startAdornment: (
           <InputAdornment position="start">
@@ -40,9 +41,6 @@ export default function SearchBar({}: Props) {
             </InputAdornment>
           </Tooltip>
         ) : null,
-      }}
-      sx={{
-        borderRadius: "8px 0 0 8px",
       }}
       placeholder="Search food item"
       onChange={(e) => onSearchQueryChange(e.target.value)}

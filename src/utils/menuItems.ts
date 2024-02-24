@@ -40,7 +40,6 @@ export const CATEGORY_MENU_ITEMS: {
         menuItemName: "Nachos Supreme",
         description:
           "Loaded with seasoned ground beef, black beans, cheese sauce, pico de gallo, and sour cream",
-        price: 100,
       },
     ],
   },
@@ -83,7 +82,6 @@ export const CATEGORY_MENU_ITEMS: {
         menuItemName: "Thai Curry",
         description:
           "Choose your protein (chicken, tofu, or shrimp) and enjoy it with our flavorful curry sauce",
-        price: 170,
       },
     ],
   },
@@ -238,13 +236,11 @@ export const CATEGORY_MENU_ITEMS: {
         menuItemName: "Aperol Spritz",
         description:
           "Light and refreshing aperitif made with Aperol, prosecco, and soda water",
-        price: 80,
       },
       {
         menuItemName: "Espresso Martini",
         description:
           "Strong and creamy coffee-based cocktail with vodka, coffee liqueur, and espresso",
-        price: 95,
       },
     ],
   },

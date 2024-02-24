@@ -12,16 +12,18 @@ export default function FoodMenuItem({ description, name, price }: Props) {
         alignItems={"center"}
       >
         <Grid item>
-          <Typography sx={{ color: "#fff", fontSize: 20 }}>{name}</Typography>
+          <Typography fontSize={20} sx={{ color: "#fff" }}>
+            {name}
+          </Typography>
         </Grid>
 
         <Grid item>
           {price ? (
-            <Typography sx={{ color: "#fff", fontSize: 20 }}>
+            <Typography fontSize={20} sx={{ color: "#fff" }}>
               ₹{price}
             </Typography>
           ) : (
-            <Typography sx={{ color: "#fff", fontSize: 12 }}>
+            <Typography fontSize={12} sx={{ color: "#fff" }}>
               (Based on Availability)
             </Typography>
           )}
