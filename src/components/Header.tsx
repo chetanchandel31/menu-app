@@ -30,6 +30,7 @@ export default function Header({}: Props) {
         backgroundColor: theme.palette.background.default,
         position: "sticky",
         top: 0,
+        zIndex: 800,
       }}
     >
       <Box

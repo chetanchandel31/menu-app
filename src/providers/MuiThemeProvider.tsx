@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import { red } from "@mui/material/colors";
 import { ReactNode } from "react";
 
 export default function MuiThemeProvider({
@@ -10,6 +11,7 @@ export default function MuiThemeProvider({
   const theme = createTheme({
     palette: {
       // mode: "dark",
+      primary: { main: red[700] },
     },
     components: {
       MuiTypography: {

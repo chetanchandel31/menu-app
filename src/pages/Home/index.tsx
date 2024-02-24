@@ -1,17 +1,72 @@
-import Header from "@/components/Header";
-import { Box, Container, Grid } from "@mui/material";
-import BrandName from "./BrandName";
 import CategoryName from "@/components/CategoryName";
 import FoodMenuItem from "@/components/FoodMenuItem";
-import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import useAppQueryParams from "@/hooks/useAppQueryParams";
+import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
+import { Box, Container, Grid } from "@mui/material";
+import Fuse from "fuse.js";
+import { useMemo } from "react";
+import BrandName from "./BrandName";
+import Filters from "./Filters";
+import getSelectedCategories from "./Filters/helpers/getSelectedCategories";
+import MenuItemsEmptyState from "./MenuItemsEmptyState";
 
 type Props = {};
 
 export default function Home({}: Props) {
+  const [queryParams] = useAppQueryParams();
+  const searchQuery = queryParams["search-query"] || "";
+
+  // remove all unrelated to selected categories
+  const categoryFilteredItems = useMemo(() => {
+    let _categoryFilteredItems: typeof CATEGORY_MENU_ITEMS = [];
+    const selectedCategories = getSelectedCategories(queryParams);
+
+    if (selectedCategories.length > 0) {
+      CATEGORY_MENU_ITEMS.forEach((category) => {
+        if (selectedCategories.includes(category.categoryName)) {
+          _categoryFilteredItems.push(category);
+        }
+      });
+    } else {
+      _categoryFilteredItems = CATEGORY_MENU_ITEMS;
+    }
+
+    return _categoryFilteredItems;
+  }, [queryParams]);
+
+  // filter `categoryFilteredItems` based on `searchQuery`
+  const searchFilteredItems = useMemo(() => {
+    let _filteredCategories: typeof CATEGORY_MENU_ITEMS = [];
+
+    if (searchQuery) {
+      categoryFilteredItems.forEach((category) => {
+        const fuse = new Fuse(category.menuItems, {
+          keys: ["menuItemName", "description"],
+          threshold: 0.3,
+        });
+        const _filteredMenuItems = fuse
+          .search(searchQuery)
+          .map((result) => result.item);
+
+        if (_filteredMenuItems.length > 0) {
+          _filteredCategories.push({
+            ...category,
+            menuItems: _filteredMenuItems,
+          });
+        }
+      });
+    } else {
+      _filteredCategories = categoryFilteredItems;
+    }
+
+    return _filteredCategories;
+  }, [searchQuery, categoryFilteredItems]);
+
   const categories: React.ReactNode[] = [];
 
-  CATEGORY_MENU_ITEMS.forEach((category, categoryIndex) => {
+  searchFilteredItems.forEach((category, categoryIndex) => {
     categories.push(
       <Grid
         container
@@ -50,6 +105,14 @@ export default function Home({}: Props) {
     );
   });
 
+  if (searchQuery && categories.length === 0) {
+    categories.push(
+      <Grid item xs={12} key="empty-state">
+        <MenuItemsEmptyState />
+      </Grid>
+    );
+  }
+
   return (
     <Box
       sx={{
@@ -64,10 +127,20 @@ export default function Home({}: Props) {
     >
       <Header />
 
-      <Container maxWidth="md" sx={{ pb: 12 }}>
-        <BrandName />
+      <Container maxWidth="md" sx={{ pb: 12, minHeight: "90vh" }}>
+        <Grid container spacing={5}>
+          <Grid item xs={12}>
+            <BrandName />
+          </Grid>
 
-        {categories}
+          <Grid item xs={12}>
+            <Filters />
+          </Grid>
+
+          <Grid item xs={12}>
+            {categories}
+          </Grid>
+        </Grid>
       </Container>
 
       <Footer />
