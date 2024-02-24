@@ -2,8 +2,6 @@
 
 https://menu-app-31.netlify.app/
 
----
-
 ## Tech stack
 
 - [Typescript](https://www.typescriptlang.org/) for type-safety
