@@ -1,64 +1,63 @@
 import useAppQueryParams from "@/hooks/useAppQueryParams";
-import useDebounce from "@/hooks/useDebounce";
-import { FilterListRounded, SearchRounded } from "@mui/icons-material";
-import { Box, Button, Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { FilterListRounded } from "@mui/icons-material";
+import { Badge, Box, Button, Grid } from "@mui/material";
 import FiltersDrawer from "./FiltersDrawer";
+import SearchBar from "./SearchBar";
 
 type Props = {};
 
 export default function Filters({}: Props) {
   const [queryParams, setQueryParams] = useAppQueryParams();
-  const [searchQuery, setSearchQuery] = useState(
-    queryParams["search-query"] || ""
-  );
-  const debounce = useDebounce({ delayMs: 200 });
 
-  const onSearchQueryChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    debounce(() => setQueryParams({ "search-query": e.target.value || null }));
-    setSearchQuery(e.target.value);
+  let filtersCount = 0;
+  if (queryParams["sort-by"]) {
+    filtersCount += 1;
+  }
+  if (
+    queryParams["selected-categories"] &&
+    queryParams["selected-categories"]?.length > 0
+  ) {
+    filtersCount += queryParams["selected-categories"]?.length;
+  }
+
+  const clearAllFilters = () => {
+    setQueryParams({
+      "show-filters": null,
+      "selected-categories": null,
+      "sort-by": null,
+    });
   };
 
   return (
     <Box sx={{ color: "#fff" }}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <TextField
-              fullWidth
-              name="Search-food-item"
-              InputProps={{
-                style: {
-                  backgroundColor: "#fff",
-                },
-              }}
-              sx={{
-                borderRadius: "8px 0 0 8px",
-              }}
-              placeholder="Search food item"
-              onChange={onSearchQueryChange}
-              value={searchQuery}
-            />
-            <Button
-              sx={{ height: 56, borderRadius: "0 8px 8px 0" }}
-              variant="contained"
-            >
-              <SearchRounded />
-            </Button>
-          </Box>
+          <SearchBar />
         </Grid>
 
-        <Grid item xs={12} textAlign={"right"}>
-          <Button
-            color="inherit"
-            startIcon={<FilterListRounded />}
-            onClick={() => setQueryParams({ "show-filters": true })}
-            variant="outlined"
-          >
-            Filters
-          </Button>
+        <Grid item xs={12}>
+          <Grid container spacing={1} justifyContent={"end"}>
+            {filtersCount > 0 ? (
+              <Grid item>
+                <Button onClick={clearAllFilters}>
+                  <strong>Clear all filters</strong>
+                </Button>
+              </Grid>
+            ) : null}
+
+            <Grid item>
+              <Badge badgeContent={filtersCount} color="primary">
+                <Button
+                  color="inherit"
+                  startIcon={<FilterListRounded />}
+                  onClick={() => setQueryParams({ "show-filters": true })}
+                  variant="outlined"
+                >
+                  Filters
+                </Button>
+              </Badge>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
 

@@ -40,7 +40,7 @@ export default function Home({}: Props) {
     <Box
       sx={{
         backgroundImage: "url('/background.png')",
-        boxShadow: "inset 0 0 0 100vmax rgba(0,0,0,.3)",
+        boxShadow: "inset 0 0 0 100vmax rgba(0,0,0,.5)",
         height: "100vh",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
