@@ -11,6 +11,7 @@ import BrandName from "./BrandName";
 import Filters from "./Filters";
 import getSelectedCategories from "./Filters/helpers/getSelectedCategories";
 import MenuItemsEmptyState from "./MenuItemsEmptyState";
+import { getDeepCopy } from "@/utils/getDeepCopy";
 
 type Props = {};
 
@@ -64,9 +65,37 @@ export default function Home({}: Props) {
     return _filteredCategories;
   }, [searchQuery, categoryFilteredItems]);
 
+  // sort menu items in `searchFilteredItems`
+  const sortedFilteredItems = useMemo(() => {
+    let _sortedFilteredItems: typeof CATEGORY_MENU_ITEMS = [];
+    const sortBy = queryParams["sort-by"];
+
+    if (sortBy) {
+      searchFilteredItems.forEach((category) => {
+        const sortedMenuItems = getDeepCopy(category.menuItems).sort((a, b) => {
+          const priceA = a.price || Infinity;
+          const priceB = b.price || Infinity;
+
+          if (sortBy === "price-high-to-low") {
+            return priceB - priceA;
+          } else if (sortBy === "price-low-to-high") {
+            return priceA - priceB;
+          }
+          return 0;
+        });
+
+        _sortedFilteredItems.push({ ...category, menuItems: sortedMenuItems });
+      });
+    } else {
+      _sortedFilteredItems = searchFilteredItems;
+    }
+
+    return _sortedFilteredItems;
+  }, [queryParams, searchFilteredItems]);
+
   const categories: React.ReactNode[] = [];
 
-  searchFilteredItems.forEach((category, categoryIndex) => {
+  sortedFilteredItems.forEach((category, categoryIndex) => {
     categories.push(
       <Grid
         container

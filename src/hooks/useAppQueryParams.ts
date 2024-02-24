@@ -1,6 +1,7 @@
 import {
   BooleanParam,
   StringParam,
+  createEnumParam,
   decodeDelimitedArray,
   encodeDelimitedArray,
   useQueryParams,
@@ -15,10 +16,22 @@ const CommaArrayParam = {
     decodeDelimitedArray(arrayStr, ","),
 };
 
+export const SORT_BY = "SORT_BY";
+export const ENUM_SORT_BY = {
+  PRICE_HIGH_TO_LOW: "price-high-to-low",
+  PRICE_LOW_TO_HIGH: "price-low-to-high",
+} as const;
+export const SortByParams = createEnumParam([
+  ENUM_SORT_BY.PRICE_HIGH_TO_LOW,
+  ENUM_SORT_BY.PRICE_LOW_TO_HIGH,
+]);
+
 export default function useAppQueryParams() {
   return useQueryParams({
+    "show-filters": BooleanParam,
+
     "search-query": StringParam,
     "selected-categories": CommaArrayParam,
-    "show-filters": BooleanParam,
+    "sort-by": SortByParams,
   });
 }
