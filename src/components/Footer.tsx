@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { Box, Grid, Typography } from "@mui/material";
 import { indigo } from "@mui/material/colors";
 
@@ -31,7 +32,7 @@ export default function Footer({}: Props) {
         sx={{
           margin: "auto",
           width: "100%",
-          maxWidth: 1000,
+          maxWidth: config.HEADER_FOOTER_MAX_WIDTH,
           px: 2,
         }}
       >

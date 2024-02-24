@@ -7,7 +7,6 @@ import getSortedMenuItems from "./getSortedMenuItems";
 
 export default function useGetFilteredCategories() {
   const [queryParams] = useAppQueryParams();
-  const searchQuery = queryParams["search-query"] || "";
 
   // remove all categories unrelated to selected categories
   const categoryFilteredItems = useMemo(() => {
@@ -28,6 +27,8 @@ export default function useGetFilteredCategories() {
   }, [queryParams]);
 
   // filter `categoryFilteredItems` based on `searchQuery`
+  const searchQuery = queryParams["search-query"] || "";
+
   const searchFilteredItems = useMemo(() => {
     let _filteredCategories: typeof CATEGORY_MENU_ITEMS = [];
 

@@ -1,6 +1,7 @@
 import useIsMdDown from "@/hooks/useIsMdDown";
 import { Box, Button, Grid, useTheme } from "@mui/material";
 import HeaderMenuBtnMobile from "./HeaderMenuBtnMobile";
+import { config } from "@/config";
 
 type Props = {};
 
@@ -42,7 +43,7 @@ export default function Header({}: Props) {
           minHeight: 52,
           margin: "auto",
           width: "100%",
-          maxWidth: 1000,
+          maxWidth: config.HEADER_FOOTER_MAX_WIDTH,
           display: "flex",
           alignItems: "center",
           px: 2,

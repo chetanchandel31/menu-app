@@ -1,4 +1,4 @@
-import FoodMenuItem from "@/components/SingleCategory/FoodMenuItem";
+import FoodMenuItem from "@/pages/Home/SingleCategory/FoodMenuItem";
 import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 import { Grid, Typography } from "@mui/material";
 

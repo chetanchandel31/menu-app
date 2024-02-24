@@ -6,7 +6,7 @@ import BrandName from "./BrandName";
 import Filters from "./Filters";
 import useGetFilteredCategories from "./Filters/helpers/useGetFilteredCategories";
 import MenuItemsEmptyState from "./MenuItemsEmptyState";
-import SingleCategory from "@/components/SingleCategory/index.tsx";
+import SingleCategory from "@/pages/Home/SingleCategory/index.tsx";
 
 type Props = {};
 
