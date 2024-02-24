@@ -1,4 +1,4 @@
-export const categoryMenuItems: {
+export const CATEGORY_MENU_ITEMS: {
   categoryName: string;
   menuItems: { menuItemName: string; price?: number; description: string }[];
 }[] = [
@@ -219,6 +219,121 @@ export const categoryMenuItems: {
       {
         menuItemName: "Cocktails",
         description: "Classic and signature cocktails",
+        price: 90,
+      },
+    ],
+  },
+
+  // Veggies
+  {
+    categoryName: "Veggies",
+    menuItems: [
+      {
+        menuItemName: "Spinach Artichoke Dip",
+        description:
+          "Creamy spinach and artichoke dip served with warm pita bread",
+        price: 85,
+      },
+      {
+        menuItemName: "Edamame",
+        description: "Steamed soybeans sprinkled with sea salt",
+        price: 60,
+      },
+      {
+        menuItemName: "Fried Cauliflower Bites",
+        description: "Crispy cauliflower florets tossed in a buffalo sauce",
+        price: 75,
+      },
+      {
+        menuItemName: "Bruschetta",
+        description:
+          "Toasted bread topped with chopped tomatoes, garlic, and olive oil",
+        price: 65,
+      },
+      {
+        menuItemName: "Hummus & Vegetable Platter",
+        description:
+          "Classic hummus served with assorted vegetables and pita bread",
+        price: 80,
+      },
+      {
+        menuItemName: "Onion Rings (Vegan)",
+        description: "Crispy golden onion rings made with a vegan batter",
+        price: 70,
+      },
+    ],
+  },
+
+  // Sides
+  {
+    categoryName: "Sides",
+    menuItems: [
+      {
+        menuItemName: "French Fries",
+        description: "Classic french fries",
+        price: 40,
+      },
+      {
+        menuItemName: "Mashed Potatoes",
+        description: "Creamy mashed potatoes with butter and chives",
+        price: 50,
+      },
+      {
+        menuItemName: "Coleslaw",
+        description: "Classic creamy coleslaw",
+        price: 35,
+      },
+      {
+        menuItemName: "Steamed Vegetables",
+        description: "Seasonal vegetables steamed to perfection",
+        price: 45,
+      },
+      {
+        menuItemName: "Mac and Cheese",
+        description: "Classic baked macaroni and cheese",
+        price: 55,
+      },
+      {
+        menuItemName: "Rice Pilaf",
+        description: "Fluffy rice pilaf seasoned with herbs",
+        price: 40,
+      },
+    ],
+  },
+
+  // Kids Menu
+  {
+    categoryName: "Kids Menu",
+    menuItems: [
+      {
+        menuItemName: "Chicken Tenders & Fries",
+        description: "Crispy chicken tenders with French fries",
+        price: 80,
+      },
+      {
+        menuItemName: "Mac & Cheese",
+        description: "Kid-sized portion of classic baked macaroni and cheese",
+        price: 60,
+      },
+      {
+        menuItemName: "Grilled Cheese & Tomato Soup",
+        description:
+          "Classic grilled cheese sandwich served with a cup of tomato soup",
+        price: 70,
+      },
+      {
+        menuItemName: "Spaghetti with Meat Sauce",
+        description: "Kid-sized portion of spaghetti with classic meat sauce",
+        price: 75,
+      },
+      {
+        menuItemName: "Chicken Nuggets & Fries",
+        description: "Chicken nuggets served with French fries",
+        price: 85,
+      },
+      {
+        menuItemName: "Fish Sticks & Fries",
+        description: "Crispy fish sticks served with French fries",
         price: 90,
       },
     ],

@@ -3,10 +3,47 @@ import { Box, Container, Grid } from "@mui/material";
 import BrandName from "./BrandName";
 import CategoryName from "@/components/CategoryName";
 import FoodMenuItem from "@/components/FoodMenuItem";
+import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
+import Footer from "@/components/Footer";
 
 type Props = {};
 
 export default function Home({}: Props) {
+  const categories: React.ReactNode[] = [];
+
+  CATEGORY_MENU_ITEMS.forEach((category, categoryIndex) => {
+    categories.push(
+      <Grid
+        container
+        direction={categoryIndex % 2 === 0 ? undefined : "row-reverse"}
+        item
+        xs={12}
+        key={category.categoryName}
+        spacing={1}
+      >
+        <Grid container spacing={3} item xs={12} md={6}>
+          <Grid item xs={12}>
+            <CategoryName>{category.categoryName}</CategoryName>
+          </Grid>
+
+          {category.menuItems.map((menuItem) => (
+            <Grid key={menuItem.menuItemName} item xs={12}>
+              <FoodMenuItem
+                description={menuItem.description}
+                name={menuItem.menuItemName}
+                price={menuItem.price}
+              />
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <div style={{ color: "#fff" }}>2</div>
+        </Grid>
+      </Grid>
+    );
+  });
+
   return (
     <Box
       sx={{
@@ -21,25 +58,13 @@ export default function Home({}: Props) {
     >
       <Header />
 
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ pb: 8 }}>
         <BrandName />
 
-        <CategoryName>Appetizers</CategoryName>
-
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <FoodMenuItem
-              name="Peanut Masala"
-              description="A zesty and spicy snack made with chick peas, tomatoes and onions with an Indian twist"
-              // price={80}
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            1
-          </Grid>
-        </Grid>
+        {categories}
       </Container>
+
+      <Footer />
     </Box>
   );
 }
