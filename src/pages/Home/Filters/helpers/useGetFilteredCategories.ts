@@ -35,7 +35,7 @@ export default function useGetFilteredCategories() {
     if (searchQuery) {
       categoryFilteredItems.forEach((category) => {
         const fuse = new Fuse(category.menuItems, {
-          keys: ["menuItemName", "description"],
+          keys: ["menuItemName"],
           threshold: 0.3,
         });
         const _filteredMenuItems = fuse
