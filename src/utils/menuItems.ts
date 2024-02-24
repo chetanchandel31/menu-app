@@ -1,10 +1,12 @@
 export const CATEGORY_MENU_ITEMS: {
   categoryName: string;
+  categoryImgUrl: string;
   menuItems: { menuItemName: string; price?: number; description: string }[];
 }[] = [
   // Appetizers
   {
     categoryName: "Appetizers",
+    categoryImgUrl: "/menu-item-1.webp",
     menuItems: [
       {
         menuItemName: "Peanut Masala",
@@ -46,6 +48,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Main Courses
   {
     categoryName: "Main Courses",
+    categoryImgUrl: "/menu-item-2.webp",
     menuItems: [
       {
         menuItemName: "Chicken Parmesan",
@@ -88,6 +91,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Salads
   {
     categoryName: "Salads",
+    categoryImgUrl: "/menu-item-3.webp",
     menuItems: [
       {
         menuItemName: "Caesar Salad",
@@ -130,6 +134,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Desserts
   {
     categoryName: "Desserts",
+    categoryImgUrl: "/menu-item-1.webp",
     menuItems: [
       {
         menuItemName: "Chocolate Cake",
@@ -168,6 +173,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Drinks (non-alcoholic)
   {
     categoryName: "Drinks",
+    categoryImgUrl: "/menu-item-2.webp",
     menuItems: [
       {
         menuItemName: "Soft Drinks",
@@ -205,6 +211,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Beverages (alcoholic)
   {
     categoryName: "Beverages",
+    categoryImgUrl: "/menu-item-3.webp",
     menuItems: [
       {
         menuItemName: "Beer",
@@ -221,12 +228,31 @@ export const CATEGORY_MENU_ITEMS: {
         description: "Classic and signature cocktails",
         price: 90,
       },
+      {
+        menuItemName: "Gin & Tonic",
+        description:
+          "Classic gin cocktail with tonic water, lime wedge, and botanical garnish",
+        price: 85,
+      },
+      {
+        menuItemName: "Aperol Spritz",
+        description:
+          "Light and refreshing aperitif made with Aperol, prosecco, and soda water",
+        price: 80,
+      },
+      {
+        menuItemName: "Espresso Martini",
+        description:
+          "Strong and creamy coffee-based cocktail with vodka, coffee liqueur, and espresso",
+        price: 95,
+      },
     ],
   },
 
   // Veggies
   {
     categoryName: "Veggies",
+    categoryImgUrl: "/menu-item-1.webp",
     menuItems: [
       {
         menuItemName: "Spinach Artichoke Dip",
@@ -267,6 +293,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Sides
   {
     categoryName: "Sides",
+    categoryImgUrl: "/menu-item-2.webp",
     menuItems: [
       {
         menuItemName: "French Fries",
@@ -304,6 +331,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Kids Menu
   {
     categoryName: "Kids Menu",
+    categoryImgUrl: "/menu-item-3.webp",
     menuItems: [
       {
         menuItemName: "Chicken Tenders & Fries",

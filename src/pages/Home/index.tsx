@@ -19,26 +19,32 @@ export default function Home({}: Props) {
         item
         xs={12}
         key={category.categoryName}
-        spacing={1}
+        spacing={2}
       >
-        <Grid container spacing={3} item xs={12} md={6}>
-          <Grid item xs={12}>
-            <CategoryName>{category.categoryName}</CategoryName>
-          </Grid>
-
-          {category.menuItems.map((menuItem) => (
-            <Grid key={menuItem.menuItemName} item xs={12}>
-              <FoodMenuItem
-                description={menuItem.description}
-                name={menuItem.menuItemName}
-                price={menuItem.price}
-              />
+        <Grid item xs={12} md={6}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <CategoryName>{category.categoryName}</CategoryName>
             </Grid>
-          ))}
+
+            {category.menuItems.map((menuItem) => (
+              <Grid key={menuItem.menuItemName} item xs={12}>
+                <FoodMenuItem
+                  description={menuItem.description}
+                  name={menuItem.menuItemName}
+                  price={menuItem.price}
+                />
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <div style={{ color: "#fff" }}>2</div>
+          <img
+            src={category.categoryImgUrl}
+            alt="category-img"
+            style={{ maxWidth: "100%" }}
+          />
         </Grid>
       </Grid>
     );
@@ -58,7 +64,7 @@ export default function Home({}: Props) {
     >
       <Header />
 
-      <Container maxWidth="md" sx={{ pb: 8 }}>
+      <Container maxWidth="md" sx={{ pb: 12 }}>
         <BrandName />
 
         {categories}

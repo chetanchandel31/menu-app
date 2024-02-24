@@ -26,7 +26,7 @@ const footerLinks = [
 
 export default function Footer({}: Props) {
   return (
-    <Box component={"footer"} sx={{ backgroundColor: indigo[900], py: 2 }}>
+    <Box component={"footer"} sx={{ backgroundColor: indigo[900], py: 4 }}>
       <Box
         sx={{
           margin: "auto",

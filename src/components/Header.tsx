@@ -34,7 +34,7 @@ export default function Header({}: Props) {
     >
       <Box
         sx={{
-          height: 52,
+          minHeight: 52,
           margin: "auto",
           width: "100%",
           maxWidth: 1000,
