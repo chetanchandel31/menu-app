@@ -1,5 +1,11 @@
+import Header from "@/components/Header";
+
 type Props = {};
 
 export default function HomePage({}: Props) {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }

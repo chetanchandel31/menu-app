@@ -1,12 +1,13 @@
 import { CloseRounded, MenuRounded } from "@mui/icons-material";
-import { Box, Button, Drawer, Grid, IconButton, useTheme } from "@mui/material";
+import { Box, Drawer, Grid, IconButton } from "@mui/material";
 import { useState } from "react";
+import AuthButtons from "./AuthButtons";
+import { TypeHeaderNavItem } from "@/types";
+import HeaderNavItem from "./HeaderNavItem";
 
-type Props = { navItems: { name: string }[] };
+type Props = { navItems: TypeHeaderNavItem[] };
 
 export default function HeaderMenuBtnMobile({ navItems }: Props) {
-  const theme = useTheme();
-
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
@@ -30,23 +31,14 @@ export default function HeaderMenuBtnMobile({ navItems }: Props) {
           <Grid container spacing={1}>
             {navItems.map((navItem) => (
               <Grid item xs={12} key={navItem.name}>
-                <Button
-                  fullWidth
-                  color="inherit"
-                  sx={{
-                    fontWeight: navItem.name === "HOME" ? 700 : undefined,
-                    backgroundColor:
-                      navItem.name === "HOME"
-                        ? theme.palette.action.focus
-                        : undefined,
-                    color: theme.palette.text.secondary,
-                  }}
-                >
-                  {navItem.name}
-                </Button>
+                <HeaderNavItem headerNavItem={navItem} />
               </Grid>
             ))}
           </Grid>
+
+          <Box sx={{ py: 5 }}>
+            <AuthButtons />
+          </Box>
         </Box>
       </Drawer>
     </>

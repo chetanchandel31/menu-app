@@ -1,6 +1,6 @@
 export const routes = {
   home: {
-    path: "/",
+    path: "/home",
     name: "Brand name",
   },
   menu: {
@@ -14,11 +14,9 @@ export const routes = {
   auth_login: {
     path: "/auth/login",
     name: "Login",
-    showInTopNav: false,
   },
   auth_signup: {
     path: "/auth/signup",
     name: "Sign Up",
-    showInTopNav: false,
   },
 } as const;
