@@ -1,6 +1,6 @@
-import FoodMenuItem from "@/pages/Home/SingleCategory/FoodMenuItem";
 import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 import { Grid, Typography } from "@mui/material";
+import FoodMenuItem from "./FoodMenuItem";
 
 type Props = {
   category: (typeof CATEGORY_MENU_ITEMS)[number];
