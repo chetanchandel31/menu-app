@@ -1,16 +1,16 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import useAppQueryParams from "@/hooks/useAppQueryParams";
-import SingleCategory from "@/pages/Home/SingleCategory";
 import { Box, Container, Grid } from "@mui/material";
 import BrandName from "./BrandName";
 import Filters from "./Filters";
 import useGetFilteredCategories from "./Filters/helpers/useGetFilteredCategories";
 import MenuItemsEmptyState from "./MenuItemsEmptyState";
+import SingleCategory from "./SingleCategory";
 
 type Props = {};
 
-export default function Home({}: Props) {
+export default function MenuPage({}: Props) {
   const [queryParams] = useAppQueryParams();
   const searchQuery = queryParams["search-query"] || "";
 
