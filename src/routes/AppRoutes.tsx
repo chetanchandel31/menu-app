@@ -9,7 +9,7 @@ export default function AppRoutes() {
     <Routes>
       <Route path={"/"} element={<Navigate replace to={routes.home.path} />} />
 
-      <Route path={routes.home.path} element={<Home />} />
+      <Route path={routes.menu.path} element={<Home />} />
 
       <Route element={<NotFound />} path="*" />
     </Routes>
