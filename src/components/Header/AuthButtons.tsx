@@ -2,12 +2,20 @@ import { useAuth } from "@/providers/AuthProvider/useAuth";
 import { routes } from "@/routes/routes";
 import { LogoutRounded } from "@mui/icons-material";
 import { Button, Grid, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 type Props = {};
 
 export default function AuthButtons({}: Props) {
   const auth = useAuth();
+  const location = useLocation();
+
+  if (
+    location.pathname === routes.auth_login.path ||
+    location.pathname === routes.auth_signup.path
+  ) {
+    return null;
+  }
 
   return auth.isLoggedIn ? (
     <Grid container spacing={2} alignItems={"center"}>

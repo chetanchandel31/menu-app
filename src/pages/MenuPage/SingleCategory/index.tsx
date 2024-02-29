@@ -44,7 +44,7 @@ export default function SingleCategory({ category, categoryIndex }: Props) {
         </Grid>
       </Grid>
 
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={6} textAlign={"center"}>
         <img
           src={category.categoryImgUrl}
           alt="category-img"
