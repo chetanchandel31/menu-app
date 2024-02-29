@@ -1,6 +1,7 @@
 export const config = {
   authCookieDomain: import.meta.env.PROD ? location.hostname : "localhost",
   HEADER_FOOTER_MAX_WIDTH: 1000,
+  HEADER_MIN_HEIGHT: 52,
 } as const;
 
 export const ACCESS_TOKEN = "_mn-access-token";

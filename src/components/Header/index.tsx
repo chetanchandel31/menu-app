@@ -46,7 +46,7 @@ export default function Header({}: Props) {
     >
       <Box
         sx={{
-          minHeight: 52,
+          minHeight: config.HEADER_MIN_HEIGHT,
           margin: "auto",
           width: "100%",
           maxWidth: config.HEADER_FOOTER_MAX_WIDTH,
