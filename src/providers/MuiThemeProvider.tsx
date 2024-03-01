@@ -27,8 +27,11 @@ export default function MuiThemeProvider({
       },
       MuiButton: {
         styleOverrides: {
-          root: { textTransform: "none" },
+          root: { textTransform: "none", boxShadow: "none" },
         },
+      },
+      MuiDialog: {
+        defaultProps: { disableRestoreFocus: true, fullWidth: true },
       },
     },
   });

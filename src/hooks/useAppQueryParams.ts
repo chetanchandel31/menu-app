@@ -26,12 +26,18 @@ export const SortByParams = createEnumParam([
   ENUM_SORT_BY.PRICE_LOW_TO_HIGH,
 ]);
 
+export const CATEGORY = "category";
+
 export default function useAppQueryParams() {
   return useQueryParams({
+    // menu filters
     "show-filters": BooleanParam,
 
     "search-query": StringParam,
     "selected-categories": CommaArrayParam,
     "sort-by": SortByParams,
+
+    // admin
+    [CATEGORY]: StringParam,
   });
 }

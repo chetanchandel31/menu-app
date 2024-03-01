@@ -21,6 +21,7 @@ export default function SearchBar({}: Props) {
   return (
     <TextField
       fullWidth
+      size="medium"
       name="Search-food-item"
       InputProps={{
         sx: {

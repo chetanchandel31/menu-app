@@ -27,7 +27,7 @@ export default function Header({}: Props) {
   ];
 
   if (auth.isLoggedIn) {
-    // ideally should check for user's role instead of just `isLoggedIn`
+    // on proper app, should check for user's role instead of just `isLoggedIn`
     navItems.push({
       name: "ADMIN",
       path: routes.admin.path,

@@ -1,14 +1,29 @@
-// TODO: rm
+import { z } from "zod";
 
-export const CATEGORY_MENU_ITEMS: {
-  categoryName: string;
-  categoryImgUrl: string;
-  menuItems: { menuItemName: string; price?: number; description: string }[];
-}[] = [
+export const schemaCategory = z.object({
+  categoryName: z.string(),
+  categoryImgUrl: z.string(),
+  menuItems: z.array(
+    z.object({
+      menuItemName: z.string(),
+      price: z.number().optional(),
+      description: z.string(),
+    })
+  ),
+});
+export type TypeCategory = z.infer<typeof schemaCategory>;
+
+export const CATEGORY_IMAGES = {
+  "chopstick-item": "/menu-item-1.webp",
+  chapati: "/menu-item-2.webp",
+  "warm-drink-in-cup": "/menu-item-3.webp",
+} as const;
+
+export const DEFAULT_CATEGORIES: TypeCategory[] = [
   // Appetizers
   {
     categoryName: "Appetizers",
-    categoryImgUrl: "/menu-item-1.webp",
+    categoryImgUrl: CATEGORY_IMAGES["chopstick-item"],
     menuItems: [
       {
         menuItemName: "Peanut Masala",
@@ -49,7 +64,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Main Courses
   {
     categoryName: "Main Courses",
-    categoryImgUrl: "/menu-item-2.webp",
+    categoryImgUrl: CATEGORY_IMAGES["chapati"],
     menuItems: [
       {
         menuItemName: "Chicken Parmesan",
@@ -91,7 +106,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Salads
   {
     categoryName: "Salads",
-    categoryImgUrl: "/menu-item-3.webp",
+    categoryImgUrl: CATEGORY_IMAGES["warm-drink-in-cup"],
     menuItems: [
       {
         menuItemName: "Caesar Salad",
@@ -134,7 +149,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Desserts
   {
     categoryName: "Desserts",
-    categoryImgUrl: "/menu-item-1.webp",
+    categoryImgUrl: CATEGORY_IMAGES["chopstick-item"],
     menuItems: [
       {
         menuItemName: "Chocolate Cake",
@@ -211,7 +226,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Beverages (alcoholic)
   {
     categoryName: "Beverages",
-    categoryImgUrl: "/menu-item-3.webp",
+    categoryImgUrl: CATEGORY_IMAGES["warm-drink-in-cup"],
     menuItems: [
       {
         menuItemName: "Beer",
@@ -250,7 +265,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Veggies
   {
     categoryName: "Veggies",
-    categoryImgUrl: "/menu-item-1.webp",
+    categoryImgUrl: CATEGORY_IMAGES["chopstick-item"],
     menuItems: [
       {
         menuItemName: "Spinach Artichoke Dip",
@@ -329,7 +344,7 @@ export const CATEGORY_MENU_ITEMS: {
   // Kids Menu
   {
     categoryName: "Kids Menu",
-    categoryImgUrl: "/menu-item-3.webp",
+    categoryImgUrl: CATEGORY_IMAGES["warm-drink-in-cup"],
     menuItems: [
       {
         menuItemName: "Chicken Tenders & Fries",

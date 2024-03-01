@@ -6,6 +6,7 @@ import MuiThemeProvider from "./MuiThemeProvider";
 import { SnackbarProvider } from "notistack";
 import AuthProvider from "./AuthProvider";
 import { ConfirmProvider } from "material-ui-confirm";
+import CategoriesProvider from "./CategoriesProvider";
 
 export default function AllProviders({ children }: { children: ReactNode }) {
   return (
@@ -34,7 +35,9 @@ export default function AllProviders({ children }: { children: ReactNode }) {
                 },
               }}
             >
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <CategoriesProvider>{children}</CategoriesProvider>
+              </AuthProvider>
             </ConfirmProvider>
           </MuiThemeProvider>
         </QueryParamProvider>

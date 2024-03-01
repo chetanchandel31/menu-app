@@ -42,7 +42,7 @@ export default function BtnLogout({}: Props) {
       startIcon={<LogoutRounded />}
       size="small"
     >
-      Logout
+      Log out
     </Button>
   );
 }
