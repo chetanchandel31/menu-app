@@ -1,6 +1,6 @@
 import PasswordTextfield from "@/components/PasswordTextfield";
 import { LoadingButton } from "@mui/lab";
-import { Box, Grid, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import useLoginForm from "./useLogInForm";
 import FormFieldError from "@/components/FormFieldError";
 
@@ -17,8 +17,7 @@ export default function LogInForm({}: Props) {
   } = useLoginForm({});
 
   return (
-    <Box
-      component="form"
+    <form
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
@@ -71,6 +70,6 @@ export default function LogInForm({}: Props) {
           </LoadingButton>
         </Grid>
       </Grid>
-    </Box>
+    </form>
   );
 }

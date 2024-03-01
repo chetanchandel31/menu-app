@@ -3,6 +3,7 @@ import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 import { MenuItem, TableCell, TableRow, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import getCategoryUrl from "./getCategoryUrl";
+import useConfirmCategoryDelete from "./useConfirmCategoryDelete";
 
 type Props = {
   category: TypeCategory;
@@ -11,13 +12,13 @@ type Props = {
 /*  TODO: 
 
 1. edit
-2. delete
-3. open
 */
 
 export default function TableRowCategory({ category }: Props) {
   const navigate = useNavigate();
   const categoryUrl = getCategoryUrl({ categoryName: category.categoryName });
+
+  const confirmCategoryDelete = useConfirmCategoryDelete();
 
   return (
     <TableRow
@@ -67,7 +68,9 @@ export default function TableRowCategory({ category }: Props) {
           </MenuItem>
           <MenuItem
             onClick={() => {
-              //  TODO:
+              confirmCategoryDelete.onDelete({
+                categoryName: category.categoryName,
+              });
             }}
           >
             <Typography color="error" variant="body2">

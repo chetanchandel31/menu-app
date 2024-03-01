@@ -1,5 +1,6 @@
 import SelectCategoryImage from "@/components/SelectCategoryImage";
 import { CATEGORY_IMAGES } from "@/providers/CategoriesProvider/categories";
+import doesCategoryNameExist from "@/providers/CategoriesProvider/helpers/doesCategoryNameExist";
 import { useCategories } from "@/providers/CategoriesProvider/useCategories";
 import {
   Button,
@@ -18,7 +19,7 @@ type Props = {
 
 export default function DialogCategoryCreate({ onClose }: Props) {
   const snackbar = useSnackbar();
-  const { dispatch } = useCategories();
+  const { categories, dispatch } = useCategories();
 
   const [categoryName, setCategoryName] = useState("");
 
@@ -29,23 +30,26 @@ export default function DialogCategoryCreate({ onClose }: Props) {
   const isDisabled = !categoryName;
 
   const handleCategoryCreate = () => {
-    dispatch({
-      type: "ADD-CATEGORY",
-      payload: {
-        categoryName,
-        categoryImgUrl,
-        menuItems: [],
-      },
-      onFinish: (type, message) => {
-        if (type === "error") {
-          snackbar.enqueueSnackbar(message, { variant: "error" });
-        }
-        if (type === "success") {
-          snackbar.enqueueSnackbar(message, { variant: "success" });
-          onClose();
-        }
-      },
-    });
+    const doesExistAlready = doesCategoryNameExist(categoryName, categories);
+
+    if (doesExistAlready) {
+      snackbar.enqueueSnackbar("Category with this name already exists", {
+        variant: "error",
+      });
+    } else {
+      dispatch({
+        type: "ADD-CATEGORY",
+        payload: {
+          categoryName,
+          categoryImgUrl,
+          menuItems: [],
+        },
+      });
+      snackbar.enqueueSnackbar(`New category created: ${categoryName}`, {
+        variant: "success",
+      });
+      onClose();
+    }
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

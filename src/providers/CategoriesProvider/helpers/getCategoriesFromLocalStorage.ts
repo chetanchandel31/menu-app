@@ -8,8 +8,13 @@ import { z } from "zod";
 
 export default function getCategoriesFromLocalStorage(): TypeCategory[] {
   try {
-    return z.array(schemaCategory).parse(localStorage.get(CATEGORIES_LS_KEY));
+    const localStorageCategories = JSON.parse(
+      localStorage.getItem(CATEGORIES_LS_KEY) || ""
+    );
+
+    return z.array(schemaCategory).parse(localStorageCategories);
   } catch (e) {
+    console.log(e, "#eiu2938723839");
     return DEFAULT_CATEGORIES;
   }
 }
