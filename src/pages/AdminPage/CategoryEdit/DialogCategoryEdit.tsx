@@ -1,7 +1,8 @@
 import SelectCategoryImage from "@/components/SelectCategoryImage";
-import { CATEGORY_IMAGES } from "@/providers/CategoriesProvider/categories";
+import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 import doesCategoryNameExist from "@/providers/CategoriesProvider/helpers/doesCategoryNameExist";
 import { useCategories } from "@/providers/CategoriesProvider/useCategories";
+import { SaveRounded } from "@mui/icons-material";
 import {
   Button,
   Dialog,
@@ -14,38 +15,42 @@ import { useSnackbar } from "notistack";
 import { useState } from "react";
 
 type Props = {
+  categoryToEdit: TypeCategory;
   onClose: () => void;
 };
 
-export default function DialogCategoryCreate({ onClose }: Props) {
+export default function DialogCategoryEdit({ categoryToEdit, onClose }: Props) {
   const snackbar = useSnackbar();
   const { categories, dispatch } = useCategories();
 
-  const [categoryName, setCategoryName] = useState("");
-
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [categoryName, setCategoryName] = useState(categoryToEdit.categoryName);
   const [categoryImgUrl, setCategoryImgUrl] = useState<string>(
-    CATEGORY_IMAGES["chopstick-item"]
+    categoryToEdit.categoryImgUrl
   );
 
-  const isDisabled = !categoryName;
+  const isDisabled = !categoryName || !hasUnsavedChanges;
 
-  const handleCategoryCreate = () => {
+  const handleCategoryUpdate = () => {
     const doesNameExist = doesCategoryNameExist(categoryName, categories);
 
-    if (doesNameExist) {
+    if (categoryName !== categoryToEdit.categoryName && doesNameExist) {
       snackbar.enqueueSnackbar("Category with this name already exists", {
         variant: "error",
       });
     } else {
       dispatch({
-        type: "ADD-CATEGORY",
+        type: "UPDATE-CATEGORY",
         payload: {
-          categoryName,
-          categoryImgUrl,
-          menuItems: [],
+          categoryNameToUpdate: categoryToEdit.categoryName,
+          updatedCategory: {
+            categoryImgUrl,
+            categoryName,
+            menuItems: categoryToEdit.menuItems,
+          },
         },
       });
-      snackbar.enqueueSnackbar(`New category created: ${categoryName}`, {
+      snackbar.enqueueSnackbar(`Category updated successfully`, {
         variant: "success",
       });
       onClose();
@@ -55,18 +60,18 @@ export default function DialogCategoryCreate({ onClose }: Props) {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isDisabled) {
-      handleCategoryCreate();
+      handleCategoryUpdate();
     }
   };
 
   return (
-    <Dialog open={true} onClose={onClose} maxWidth="xs">
+    <Dialog open={true} onClose={onClose}>
       <DialogContent>
         <form onSubmit={onSubmit}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography fontWeight={700} variant="h6">
-                Create category
+                Edit category
               </Typography>
             </Grid>
 
@@ -75,21 +80,32 @@ export default function DialogCategoryCreate({ onClose }: Props) {
                 autoFocus
                 name="category-name"
                 label="Category name"
-                onChange={(e) => setCategoryName(e.target.value)}
+                onChange={(e) => {
+                  setCategoryName(e.target.value);
+                  setHasUnsavedChanges(true);
+                }}
                 value={categoryName}
               />
             </Grid>
 
             <Grid item xs={12}>
               <SelectCategoryImage
-                onChange={(categoryImg) => setCategoryImgUrl(categoryImg)}
+                onChange={(categoryImg) => {
+                  setCategoryImgUrl(categoryImg);
+                  setHasUnsavedChanges(true);
+                }}
                 value={categoryImgUrl}
               />
             </Grid>
 
             <Grid item xs={12} textAlign={"right"}>
-              <Button disabled={isDisabled} type="submit" variant="contained">
-                Create
+              <Button
+                disabled={isDisabled}
+                startIcon={<SaveRounded />}
+                type="submit"
+                variant="contained"
+              >
+                Save changes
               </Button>
             </Grid>
           </Grid>

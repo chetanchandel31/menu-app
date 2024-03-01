@@ -13,6 +13,7 @@ import {
 import CategoryCreate from "../CategoryCreate";
 import TableRowCategory from "./TableRowCategory";
 import HelperText from "@/components/HelperText";
+import CategoryEdit from "../CategoryEdit";
 
 type Props = {};
 
@@ -82,9 +83,7 @@ export default function CategoryList({}: Props) {
           </Table>
         </TableContainer>
 
-        <pre style={{ overflow: "auto" }}>
-          {JSON.stringify(categories, null, 2)}
-        </pre>
+        <CategoryEdit />
       </Grid>
     </Grid>
   );

@@ -4,17 +4,14 @@ import { MenuItem, TableCell, TableRow, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import getCategoryUrl from "./getCategoryUrl";
 import useConfirmCategoryDelete from "./useConfirmCategoryDelete";
+import useAppQueryParams from "@/hooks/useAppQueryParams";
 
 type Props = {
   category: TypeCategory;
 };
 
-/*  TODO: 
-
-1. edit
-*/
-
 export default function TableRowCategory({ category }: Props) {
+  const [, setQueryParams] = useAppQueryParams();
   const navigate = useNavigate();
   const categoryUrl = getCategoryUrl({ categoryName: category.categoryName });
 
@@ -60,18 +57,18 @@ export default function TableRowCategory({ category }: Props) {
             <Typography variant="body2">Open</Typography>
           </MenuItem>
           <MenuItem
-            onClick={() => {
-              // TODO:
-            }}
+            onClick={() =>
+              setQueryParams({ "edit-category": category.categoryName })
+            }
           >
             <Typography variant="body2">Edit</Typography>
           </MenuItem>
           <MenuItem
-            onClick={() => {
+            onClick={() =>
               confirmCategoryDelete.onDelete({
                 categoryName: category.categoryName,
-              });
-            }}
+              })
+            }
           >
             <Typography color="error" variant="body2">
               Delete

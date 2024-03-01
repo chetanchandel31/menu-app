@@ -9,6 +9,10 @@ export type TypeCategoriesAction =
   | {
       type: "DELETE-CATEGORY";
       payload: { categoryName: string };
+    }
+  | {
+      type: "UPDATE-CATEGORY";
+      payload: { categoryNameToUpdate: string; updatedCategory: TypeCategory };
     };
 
 export default function categoriesReducer(
@@ -31,6 +35,15 @@ export default function categoriesReducer(
   if (action.type === "DELETE-CATEGORY") {
     return state.filter(
       (category) => category.categoryName !== action.payload.categoryName
+    );
+  }
+
+  // update category
+  if (action.type === "UPDATE-CATEGORY") {
+    return state.map((category) =>
+      category.categoryName === action.payload.categoryNameToUpdate
+        ? action.payload.updatedCategory
+        : category
     );
   }
 
