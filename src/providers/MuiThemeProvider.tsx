@@ -19,6 +19,12 @@ export default function MuiThemeProvider({
           color: "text.primary",
         },
       },
+      MuiTextField: {
+        defaultProps: {
+          fullWidth: true,
+          size: "small",
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: { textTransform: "none" },

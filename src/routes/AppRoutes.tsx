@@ -7,6 +7,8 @@ import AuthScreen from "@/providers/AuthProvider/helpers/jsx/AuthScreen";
 import AuthScreensLayout from "@/pages/AuthPages/AuthScreensLayout";
 import LogIn from "@/pages/AuthPages/LogIn";
 import SignUp from "@/pages/AuthPages/SignUp";
+import AdminPage from "@/pages/AdminPage";
+import AuthorizedRoute from "@/providers/AuthProvider/helpers/jsx/AuthorizedRoute";
 
 export default function AppRoutes() {
   return (
@@ -16,6 +18,15 @@ export default function AppRoutes() {
       <Route path={routes.home.path} element={<HomePage />} />
 
       <Route path={routes.menu.path} element={<MenuPage />} />
+
+      <Route
+        path={routes.admin.path}
+        element={
+          <AuthorizedRoute>
+            <AdminPage />
+          </AuthorizedRoute>
+        }
+      />
 
       <Route
         element={

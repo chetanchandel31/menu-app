@@ -10,27 +10,27 @@ import HeaderNavItem from "./HeaderNavItem";
 
 type Props = {};
 
-const navItems: TypeHeaderNavItem[] = [
-  {
-    name: "HOME",
-    path: routes.home.path,
-  },
-  {
-    name: "MENU",
-    path: routes.menu.path,
-  },
-];
-
 export default function Header({}: Props) {
   const theme = useTheme();
   const isMdDown = useIsMdDown();
   const auth = useAuth();
 
+  const navItems: TypeHeaderNavItem[] = [
+    {
+      name: "HOME",
+      path: routes.home.path,
+    },
+    {
+      name: "MENU",
+      path: routes.menu.path,
+    },
+  ];
+
   if (auth.isLoggedIn) {
     // ideally should check for user's role instead of just `isLoggedIn`
     navItems.push({
       name: "ADMIN",
-      path: routes.home.path,
+      path: routes.admin.path,
     });
   }
 
@@ -42,6 +42,7 @@ export default function Header({}: Props) {
         position: "sticky",
         top: 0,
         zIndex: 800,
+        borderBottom: `solid 1px ${theme.palette.divider}`,
       }}
     >
       <Box

@@ -24,7 +24,8 @@ export default function AuthScreensLayout() {
             maxWidth: "95%",
             margin: theme.spacing(6, "auto", 6),
             px: { xs: 2, md: 5 },
-            py: 2,
+            pt: 2,
+            pb: 3,
           }}
         >
           <Outlet />
