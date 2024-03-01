@@ -1,5 +1,6 @@
 import { useCategories } from "@/providers/CategoriesProvider/useCategories";
 import {
+  Button,
   Grid,
   Paper,
   Table,
@@ -18,7 +19,7 @@ import CategoryEdit from "../CategoryEdit";
 type Props = {};
 
 export default function CategoryList({}: Props) {
-  const { categories } = useCategories();
+  const { categories, dispatch } = useCategories();
 
   const rows: React.ReactNode[] = [];
 
@@ -82,9 +83,21 @@ export default function CategoryList({}: Props) {
             <TableBody>{rows}</TableBody>
           </Table>
         </TableContainer>
-
-        <CategoryEdit />
       </Grid>
+
+      <Grid item xs={12}>
+        <Button
+          onClick={() => {
+            dispatch({
+              type: "RESTORE_DEFAULT_DATA",
+            });
+          }}
+        >
+          Restore default data
+        </Button>
+      </Grid>
+
+      <CategoryEdit />
     </Grid>
   );
 }

@@ -1,17 +1,16 @@
 import useAppQueryParams from "@/hooks/useAppQueryParams";
-import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 import { Autocomplete, Chip, Grid, TextField } from "@mui/material";
 import getSelectedCategories from "../helpers/getSelectedCategories";
+import { useCategories } from "@/providers/CategoriesProvider/useCategories";
 
 type Props = {};
-
-const CATEGORY_NAMES = CATEGORY_MENU_ITEMS.map(
-  (category) => category.categoryName
-);
 
 export default function SelectCategories({}: Props) {
   const [queryParams, setQueryParams] = useAppQueryParams();
 
+  const { categories } = useCategories();
+
+  const categoryNames = categories.map((category) => category.categoryName);
   const selectedCategories = getSelectedCategories(queryParams);
 
   const setSelectedCategories = (categories: string[]) => {
@@ -27,7 +26,7 @@ export default function SelectCategories({}: Props) {
       <Grid item xs={12}>
         <Autocomplete
           multiple
-          options={CATEGORY_NAMES}
+          options={categoryNames}
           onChange={(_e, value) => setSelectedCategories(value)}
           value={selectedCategories}
           renderTags={() => null}

@@ -1,8 +1,8 @@
 import { ENUM_SORT_BY } from "@/hooks/useAppQueryParams";
+import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 import { getDeepCopy } from "@/utils/getDeepCopy";
-import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 
-type TypeMenuItems = (typeof CATEGORY_MENU_ITEMS)[number]["menuItems"];
+type TypeMenuItems = TypeCategory["menuItems"];
 type TypeSortBy = (typeof ENUM_SORT_BY)[keyof typeof ENUM_SORT_BY];
 
 export default function getSortedMenuItems(

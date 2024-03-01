@@ -1,36 +1,38 @@
 import useAppQueryParams from "@/hooks/useAppQueryParams";
-import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 import Fuse from "fuse.js";
 import { useMemo } from "react";
 import getSelectedCategories from "./getSelectedCategories";
 import getSortedMenuItems from "./getSortedMenuItems";
+import { useCategories } from "@/providers/CategoriesProvider/useCategories";
+import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 
 export default function useGetFilteredCategories() {
   const [queryParams] = useAppQueryParams();
+  const { categories } = useCategories();
 
   // remove all categories unrelated to selected categories
   const categoryFilteredItems = useMemo(() => {
-    let _categoryFilteredItems: typeof CATEGORY_MENU_ITEMS = [];
+    let _categoryFilteredItems: TypeCategory[] = [];
     const selectedCategories = getSelectedCategories(queryParams);
 
     if (selectedCategories.length > 0) {
-      CATEGORY_MENU_ITEMS.forEach((category) => {
+      categories.forEach((category) => {
         if (selectedCategories.includes(category.categoryName)) {
           _categoryFilteredItems.push(category);
         }
       });
     } else {
-      _categoryFilteredItems = CATEGORY_MENU_ITEMS;
+      _categoryFilteredItems = categories;
     }
 
     return _categoryFilteredItems;
-  }, [queryParams]);
+  }, [queryParams, categories]);
 
   // filter `categoryFilteredItems` based on `searchQuery`
   const searchQuery = queryParams["search-query"] || "";
 
   const searchFilteredItems = useMemo(() => {
-    let _filteredCategories: typeof CATEGORY_MENU_ITEMS = [];
+    let _filteredCategories: TypeCategory[] = [];
 
     if (searchQuery) {
       categoryFilteredItems.forEach((category) => {
@@ -58,7 +60,7 @@ export default function useGetFilteredCategories() {
 
   // sort menu items in `searchFilteredItems`
   const sortedFilteredItems = useMemo(() => {
-    let _sortedFilteredItems: typeof CATEGORY_MENU_ITEMS = [];
+    let _sortedFilteredItems: TypeCategory[] = [];
     const sortBy = queryParams["sort-by"];
 
     if (sortBy) {

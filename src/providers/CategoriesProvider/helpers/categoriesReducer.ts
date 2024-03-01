@@ -1,4 +1,4 @@
-import { TypeCategory } from "../categories";
+import { DEFAULT_CATEGORIES, TypeCategory } from "../categories";
 import doesCategoryNameExist from "./doesCategoryNameExist";
 
 export type TypeCategoriesAction =
@@ -13,6 +13,9 @@ export type TypeCategoriesAction =
   | {
       type: "UPDATE-CATEGORY";
       payload: { categoryNameToUpdate: string; updatedCategory: TypeCategory };
+    }
+  | {
+      type: "RESTORE_DEFAULT_DATA";
     };
 
 export default function categoriesReducer(
@@ -45,6 +48,11 @@ export default function categoriesReducer(
         ? action.payload.updatedCategory
         : category
     );
+  }
+
+  // restore default
+  if (action.type === "RESTORE_DEFAULT_DATA") {
+    return DEFAULT_CATEGORIES;
   }
 
   return [...state];

@@ -1,13 +1,15 @@
-import { CATEGORY_MENU_ITEMS } from "@/utils/menuItems";
 import { Grid, Typography } from "@mui/material";
 import FoodMenuItem from "./FoodMenuItem";
+import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 
 type Props = {
-  category: (typeof CATEGORY_MENU_ITEMS)[number];
+  category: TypeCategory;
   categoryIndex: number;
 };
 
 export default function SingleCategory({ category, categoryIndex }: Props) {
+  if (category.menuItems.length === 0) return null;
+
   return (
     <Grid
       container
