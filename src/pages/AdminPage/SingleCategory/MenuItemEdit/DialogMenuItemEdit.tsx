@@ -1,18 +1,24 @@
 import useForm from "@/hooks/useForm";
-import { Button, Dialog, DialogContent, Grid, Typography } from "@mui/material";
-import { schemaMenuItemFormData } from "../../MenuItemForm/schemaMenuItemFormData";
-import MenuItemForm from "../../MenuItemForm";
 import { TypeCategory } from "@/providers/CategoriesProvider/categories";
-import doesMenuItemNameExistInCategory from "../../helpers/doesMenuItemNameExistInCategory";
-import { useSnackbar } from "notistack";
 import { useCategories } from "@/providers/CategoriesProvider/useCategories";
+import { Button, Dialog, DialogContent, Grid, Typography } from "@mui/material";
+import { useSnackbar } from "notistack";
+import { schemaMenuItemFormData } from "../MenuItemForm/schemaMenuItemFormData";
+import MenuItemForm from "../MenuItemForm";
+import { SaveRounded } from "@mui/icons-material";
+import doesMenuItemNameExistInCategory from "../helpers/doesMenuItemNameExistInCategory";
 
 type Props = {
   category: TypeCategory;
+  menuItem: TypeCategory["menuItems"][number];
   onClose: () => void;
 };
 
-export default function DialogMenuItemCreate({ category, onClose }: Props) {
+export default function DialogMenuItemEdit({
+  category,
+  menuItem,
+  onClose,
+}: Props) {
   const snackbar = useSnackbar();
   const { dispatch } = useCategories();
 
@@ -20,9 +26,9 @@ export default function DialogMenuItemCreate({ category, onClose }: Props) {
     useForm({
       zodValidator: schemaMenuItemFormData,
       initialData: {
-        description: "",
-        menuItemName: "",
-        price: null,
+        description: menuItem.description,
+        menuItemName: menuItem.menuItemName,
+        price: menuItem.price ?? null,
       },
     });
 
@@ -32,7 +38,7 @@ export default function DialogMenuItemCreate({ category, onClose }: Props) {
       category
     );
 
-    if (doesNameExist) {
+    if (doesNameExist && formData.menuItemName !== menuItem.menuItemName) {
       snackbar.enqueueSnackbar("Menu item with this name already exists", {
         variant: "error",
       });
@@ -41,10 +47,11 @@ export default function DialogMenuItemCreate({ category, onClose }: Props) {
     }
 
     dispatch({
-      type: "ADD_MENU_ITEM_TO_CATEGORY",
+      type: "UPDATE_MENU_ITEM",
       payload: {
         categoryName: category.categoryName,
-        menuItemToAdd: {
+        menuItemName: menuItem.menuItemName,
+        updatedMenuItem: {
           description: formData.description,
           menuItemName: formData.menuItemName,
           price: formData.price ?? undefined,
@@ -71,7 +78,7 @@ export default function DialogMenuItemCreate({ category, onClose }: Props) {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Typography fontWeight={700} variant="h6">
-                Add menu item
+                Edit menu item
               </Typography>
             </Grid>
 
@@ -99,11 +106,12 @@ export default function DialogMenuItemCreate({ category, onClose }: Props) {
                 <Grid item>
                   <Button
                     disabled={isSubmitDisabled}
+                    startIcon={<SaveRounded />}
                     type="submit"
                     sx={{ minWidth: 120 }}
                     variant="contained"
                   >
-                    Add
+                    Save changes
                   </Button>
                 </Grid>
               </Grid>

@@ -18,6 +18,7 @@ import useConfirmCategoryDelete from "../CategoryList/TableRowCategory/useConfir
 import CategoryOverview from "./CategoryOverview";
 import MenuItemCreate from "./MenuItemCreate";
 import TableRowMenuItem from "./TableRowMenuItem";
+import MenuItemEdit from "./MenuItemEdit";
 
 type Props = { category: TypeCategory };
 
@@ -90,6 +91,8 @@ export default function SingleCategory({ category }: Props) {
           Delete category
         </Button>
       </Grid>
+
+      <MenuItemEdit />
     </Grid>
   );
 }

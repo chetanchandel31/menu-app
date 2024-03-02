@@ -40,5 +40,6 @@ export default function useAppQueryParams() {
     // admin
     [CATEGORY]: StringParam,
     "edit-category": StringParam,
+    "edit-menu-item": StringParam,
   });
 }

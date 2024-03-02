@@ -1,3 +1,4 @@
+import { getDeepCopy } from "@/utils/getDeepCopy";
 import { DEFAULT_CATEGORIES, TypeCategory } from "../categories";
 import doesCategoryNameExist from "./doesCategoryNameExist";
 
@@ -19,6 +20,21 @@ export type TypeCategoriesAction =
       payload: {
         categoryName: string;
         menuItemToAdd: TypeCategory["menuItems"][number];
+      };
+    }
+  | {
+      type: "UPDATE_MENU_ITEM";
+      payload: {
+        categoryName: string;
+        menuItemName: string;
+        updatedMenuItem: TypeCategory["menuItems"][number];
+      };
+    }
+  | {
+      type: "DELETE_MENU_ITEM";
+      payload: {
+        categoryName: string;
+        menuItemName: string;
       };
     }
   | {
@@ -69,6 +85,44 @@ export default function categoriesReducer(
         menuItems: [action.payload.menuItemToAdd, ...category.menuItems],
       };
     });
+  }
+
+  // update menu item
+  if (action.type === "UPDATE_MENU_ITEM") {
+    const updatedState = getDeepCopy(state);
+
+    updatedState.forEach((category, categoryIndex) => {
+      if (category.categoryName === action.payload.categoryName) {
+        updatedState[categoryIndex] = {
+          ...category,
+          menuItems: category.menuItems.map((menuItem) =>
+            menuItem.menuItemName !== action.payload.menuItemName
+              ? menuItem
+              : action.payload.updatedMenuItem
+          ),
+        };
+      }
+    });
+
+    return updatedState;
+  }
+
+  // delete menu item
+  if (action.type === "DELETE_MENU_ITEM") {
+    const updatedState = getDeepCopy(state);
+
+    updatedState.forEach((category, categoryIndex) => {
+      if (category.categoryName === action.payload.categoryName) {
+        updatedState[categoryIndex] = {
+          ...category,
+          menuItems: category.menuItems.filter(
+            (menuItem) => menuItem.menuItemName !== action.payload.menuItemName
+          ),
+        };
+      }
+    });
+
+    return updatedState;
   }
 
   // restore default
