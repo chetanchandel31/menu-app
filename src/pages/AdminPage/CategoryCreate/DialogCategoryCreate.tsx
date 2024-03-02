@@ -1,4 +1,5 @@
 import SelectCategoryImage from "@/components/SelectCategoryImage";
+import useAppQueryParams from "@/hooks/useAppQueryParams";
 import { CATEGORY_IMAGES } from "@/providers/CategoriesProvider/categories";
 import doesCategoryNameExist from "@/providers/CategoriesProvider/helpers/doesCategoryNameExist";
 import { useCategories } from "@/providers/CategoriesProvider/useCategories";
@@ -19,6 +20,7 @@ type Props = {
 
 export default function DialogCategoryCreate({ onClose }: Props) {
   const snackbar = useSnackbar();
+  const [, setQueryParams] = useAppQueryParams();
   const { categories, dispatch } = useCategories();
 
   const [categoryName, setCategoryName] = useState("");
@@ -49,6 +51,7 @@ export default function DialogCategoryCreate({ onClose }: Props) {
         variant: "success",
       });
       onClose();
+      setQueryParams({ category: categoryName });
     }
   };
 

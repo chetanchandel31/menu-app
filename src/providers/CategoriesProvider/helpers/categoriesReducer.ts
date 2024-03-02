@@ -30,7 +30,7 @@ export default function categoriesReducer(
     );
 
     if (!doesExistAlready) {
-      return [...state, action.payload];
+      return [action.payload, ...state];
     }
   }
 

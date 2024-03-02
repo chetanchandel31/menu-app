@@ -17,13 +17,26 @@ export default function CategoryOverview({ category }: Props) {
         margin: "auto",
       }}
     >
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid
+        container
+        spacing={3}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Grid item textAlign={"center"} xs={12} md={"auto"}>
+          <img
+            alt="category-img"
+            src={category.categoryImgUrl}
+            style={{ maxHeight: 200, maxWidth: "100%" }}
+          />
+        </Grid>
+
+        <Grid item xs={12} md={"auto"}>
           <Grid
             container
             spacing={1}
-            justifyContent={"center"}
             alignItems={"center"}
+            justifyContent={{ xs: "center", md: "start" }}
           >
             <Grid item>
               <Typography fontWeight={700} variant="h6">
@@ -43,14 +56,15 @@ export default function CategoryOverview({ category }: Props) {
               </Button>
             </Grid>
           </Grid>
-        </Grid>
 
-        <Grid item xs={12} textAlign={"center"}>
-          <img
-            alt="category-img"
-            src={category.categoryImgUrl}
-            style={{ maxHeight: 300, maxWidth: "100%" }}
-          />
+          <Typography
+            color="text.secondary"
+            sx={{ mt: 1, textAlign: { xs: "center", md: "left" } }}
+            variant="body2"
+          >
+            <strong>Total menu items: </strong>
+            {category.menuItems.length}
+          </Typography>
         </Grid>
       </Grid>
     </Box>
