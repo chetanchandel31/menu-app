@@ -28,7 +28,7 @@ export default function useConfirmCategoryDelete() {
       title: (
         <Typography
           component="div"
-          style={{
+          sx={{
             display: "flex",
             alignItems: "center",
             gap: theme.spacing(1),
