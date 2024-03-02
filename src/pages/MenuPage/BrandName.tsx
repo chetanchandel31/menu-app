@@ -1,11 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { red } from "@mui/material/colors";
 
 type Props = {};
 
 export default function BrandName({}: Props) {
   return (
-    <Box sx={{ py: 5 }}>
+    <>
       <Typography
         fontWeight={700}
         fontSize={50}
@@ -27,6 +27,6 @@ export default function BrandName({}: Props) {
       <Typography textAlign={"center"} sx={{ color: "#fff" }} variant="h6">
         - Since 2018 -
       </Typography>
-    </Box>
+    </>
   );
 }

@@ -1,8 +1,11 @@
 import Header from "@/components/Header";
-import BrandName from "../MenuPage/BrandName";
-import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { blueGrey, grey } from "@mui/material/colors";
 import { config } from "@/config";
+import { routes } from "@/routes/routes";
+import { ArrowForwardRounded } from "@mui/icons-material";
+import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
+import { blueGrey, grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
+import BrandName from "../MenuPage/BrandName";
 
 type Props = {};
 
@@ -45,21 +48,46 @@ export default function HomePage({}: Props) {
               />
             </Grid>
 
-            <Grid item xs={12} md={6}>
-              <BrandName />
+            <Grid item textAlign="center" xs={12} md={6}>
+              <Grid container spacing={5}>
+                <Grid item xs={12}>
+                  <BrandName />
+                </Grid>
 
-              <Box sx={{ pt: 1, textAlign: "center" }}>
-                <Typography
-                  fontWeight={700}
-                  sx={{ color: grey[400] }}
-                  variant="h5"
-                >
-                  Delicious recipes
-                </Typography>
-                <Typography sx={{ color: grey[400] }}>
-                  Freshly prepared for your special delight
-                </Typography>
-              </Box>
+                <Grid item xs={12}>
+                  <Typography
+                    fontWeight={700}
+                    sx={{ color: grey[400] }}
+                    variant="h5"
+                  >
+                    Delicious recipes
+                  </Typography>
+                  <Typography sx={{ color: grey[400] }}>
+                    Freshly prepared for your special delight
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Button
+                    component={Link}
+                    to={routes.menu.path}
+                    fullWidth
+                    size="large"
+                    endIcon={<ArrowForwardRounded />}
+                    sx={{ maxWidth: 320 }}
+                    variant="contained"
+                  >
+                    <Typography
+                      component="span"
+                      color="inherit"
+                      fontWeight={700}
+                      variant="h6"
+                    >
+                      Explore now
+                    </Typography>
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Box>

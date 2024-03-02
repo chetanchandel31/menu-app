@@ -14,7 +14,6 @@ import {
 import CategoryCreate from "../CategoryCreate";
 import TableRowCategory from "./TableRowCategory";
 import HelperText from "@/components/HelperText";
-import CategoryEdit from "../CategoryEdit";
 
 type Props = {};
 
@@ -96,8 +95,6 @@ export default function CategoryList({}: Props) {
           Restore default data
         </Button>
       </Grid>
-
-      <CategoryEdit />
     </Grid>
   );
 }

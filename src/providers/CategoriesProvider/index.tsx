@@ -9,25 +9,25 @@ import { CATEGORIES_LS_KEY } from "@/config";
 
 type Props = { children: React.ReactNode };
 
-const reducer = (
-  state: TypeCategory[],
-  action: TypeCategoriesAction
-): TypeCategory[] => {
-  const updatedState = categoriesReducer(state, action);
-
-  try {
-    // sync updated-state to local storage before moving on
-    localStorage.setItem(CATEGORIES_LS_KEY, JSON.stringify(updatedState));
-  } catch (e) {
-    console.log(e, "#iwu34873920");
-  }
-
-  return updatedState;
-};
-
 // goal: allow child components to read and manage categories, nothing more
 export default function CategoriesProvider({ children }: Props) {
   const initialCategories = getCategoriesFromLocalStorage();
+
+  const reducer = (
+    state: TypeCategory[],
+    action: TypeCategoriesAction
+  ): TypeCategory[] => {
+    const updatedState = categoriesReducer(state, action);
+
+    try {
+      // sync updated-state to local storage before moving on
+      localStorage.setItem(CATEGORIES_LS_KEY, JSON.stringify(updatedState));
+    } catch (e) {
+      console.log(e, "#iwu34873920");
+    }
+
+    return updatedState;
+  };
 
   const [categories, dispatch] = useReducer(reducer, initialCategories);
 

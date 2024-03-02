@@ -65,7 +65,7 @@ export default function DialogCategoryEdit({ categoryToEdit, onClose }: Props) {
   };
 
   return (
-    <Dialog open={true} onClose={onClose}>
+    <Dialog open={true} onClose={onClose} maxWidth="xs">
       <DialogContent>
         <form onSubmit={onSubmit}>
           <Grid container spacing={3}>

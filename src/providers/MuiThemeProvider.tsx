@@ -33,6 +33,7 @@ export default function MuiThemeProvider({
       MuiDialog: {
         defaultProps: { disableRestoreFocus: true, fullWidth: true },
       },
+      MuiTooltip: { defaultProps: { arrow: true, placement: "top" } },
     },
   });
 

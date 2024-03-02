@@ -53,7 +53,9 @@ export default function MenuPage({}: Props) {
       <Container maxWidth="md" sx={{ pb: 12, minHeight: "90vh" }}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
-            <BrandName />
+            <Box sx={{ py: 5 }}>
+              <BrandName />
+            </Box>
           </Grid>
 
           <Grid item xs={12}>
