@@ -31,7 +31,6 @@ export default function useLoginForm({}: Params) {
       email: "",
       password: "",
     },
-    showErrorSnackbarOnSubmit: true,
   });
 
   const auth = useAuth();

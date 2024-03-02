@@ -1,10 +1,6 @@
 import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 import { routes } from "@/routes/routes";
-import {
-  AddRounded,
-  ArrowBackRounded,
-  DeleteRounded,
-} from "@mui/icons-material";
+import { ArrowBackRounded, DeleteRounded } from "@mui/icons-material";
 import {
   Button,
   Divider,
@@ -21,6 +17,7 @@ import CategoryOverview from "./CategoryOverview";
 import HelperText from "@/components/HelperText";
 import TableRowMenuItem from "./TableRowMenuItem";
 import useConfirmCategoryDelete from "../CategoryList/TableRowCategory/useConfirmCategoryDelete";
+import MenuItemCreate from "./MenuItemCreate";
 
 type Props = { category: TypeCategory };
 
@@ -67,9 +64,7 @@ export default function SingleCategory({ category }: Props) {
       </Grid>
 
       <Grid item xs={12}>
-        <Button startIcon={<AddRounded />} size="small" variant="contained">
-          Add menu item
-        </Button>
+        <MenuItemCreate />
       </Grid>
 
       <Grid item xs={12}>

@@ -91,7 +91,12 @@ export default function DialogCategoryCreate({ onClose }: Props) {
             </Grid>
 
             <Grid item xs={12} textAlign={"right"}>
-              <Button disabled={isDisabled} type="submit" variant="contained">
+              <Button
+                disabled={isDisabled}
+                type="submit"
+                sx={{ minWidth: 120 }}
+                variant="contained"
+              >
                 Create
               </Button>
             </Grid>

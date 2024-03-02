@@ -49,7 +49,6 @@ export default function useSignUpForm({}: Params) {
       password: "",
       confirmPassword: "",
     },
-    showErrorSnackbarOnSubmit: true,
   });
 
   const auth = useAuth();
