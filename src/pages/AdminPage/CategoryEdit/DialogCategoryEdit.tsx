@@ -1,7 +1,5 @@
 import SelectCategoryImage from "@/components/SelectCategoryImage";
 import { TypeCategory } from "@/providers/CategoriesProvider/categories";
-import doesCategoryNameExist from "@/providers/CategoriesProvider/helpers/doesCategoryNameExist";
-import { useCategories } from "@/providers/CategoriesProvider/useCategories";
 import { SaveRounded } from "@mui/icons-material";
 import {
   Button,
@@ -11,8 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
-import { useState } from "react";
+import useCategoryEditForm from "./useCategoryEditForm";
 
 type Props = {
   categoryToEdit: TypeCategory;
@@ -20,49 +17,17 @@ type Props = {
 };
 
 export default function DialogCategoryEdit({ categoryToEdit, onClose }: Props) {
-  const snackbar = useSnackbar();
-  const { categories, dispatch } = useCategories();
-
-  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  const [categoryName, setCategoryName] = useState(categoryToEdit.categoryName);
-  const [categoryImgUrl, setCategoryImgUrl] = useState<string>(
-    categoryToEdit.categoryImgUrl
-  );
-
-  const isDisabled = !categoryName || !hasUnsavedChanges;
-
-  const handleCategoryUpdate = () => {
-    const doesNameExist = doesCategoryNameExist(categoryName, categories);
-
-    if (categoryName !== categoryToEdit.categoryName && doesNameExist) {
-      snackbar.enqueueSnackbar("Category with this name already exists", {
-        variant: "error",
-      });
-    } else {
-      dispatch({
-        type: "UPDATE-CATEGORY",
-        payload: {
-          categoryNameToUpdate: categoryToEdit.categoryName,
-          updatedCategory: {
-            categoryImgUrl,
-            categoryName,
-            menuItems: categoryToEdit.menuItems,
-          },
-        },
-      });
-      snackbar.enqueueSnackbar(`Category updated successfully`, {
-        variant: "success",
-      });
-      onClose();
-    }
-  };
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!isDisabled) {
-      handleCategoryUpdate();
-    }
-  };
+  const {
+    categoryImgUrl,
+    onCategoryImgUrlChange,
+    categoryName,
+    onCategoryNameChange,
+    isDisabled,
+    onSubmit,
+  } = useCategoryEditForm({
+    categoryToEdit,
+    onClose,
+  });
 
   return (
     <Dialog open={true} onClose={onClose} maxWidth="xs">
@@ -81,8 +46,7 @@ export default function DialogCategoryEdit({ categoryToEdit, onClose }: Props) {
                 name="category-name"
                 label="Category name"
                 onChange={(e) => {
-                  setCategoryName(e.target.value);
-                  setHasUnsavedChanges(true);
+                  onCategoryNameChange(e.target.value);
                 }}
                 value={categoryName}
               />
@@ -90,10 +54,7 @@ export default function DialogCategoryEdit({ categoryToEdit, onClose }: Props) {
 
             <Grid item xs={12}>
               <SelectCategoryImage
-                onChange={(categoryImg) => {
-                  setCategoryImgUrl(categoryImg);
-                  setHasUnsavedChanges(true);
-                }}
+                onChange={onCategoryImgUrlChange}
                 value={categoryImgUrl}
               />
             </Grid>
