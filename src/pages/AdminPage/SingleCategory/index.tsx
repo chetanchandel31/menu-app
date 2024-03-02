@@ -1,3 +1,4 @@
+import HelperText from "@/components/HelperText";
 import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 import { routes } from "@/routes/routes";
 import { ArrowBackRounded, DeleteRounded } from "@mui/icons-material";
@@ -8,16 +9,15 @@ import {
   Paper,
   Table,
   TableBody,
-  TableContainer,
   TableCell,
+  TableContainer,
   TableRow,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import CategoryOverview from "./CategoryOverview";
-import HelperText from "@/components/HelperText";
-import TableRowMenuItem from "./TableRowMenuItem";
 import useConfirmCategoryDelete from "../CategoryList/TableRowCategory/useConfirmCategoryDelete";
+import CategoryOverview from "./CategoryOverview";
 import MenuItemCreate from "./MenuItemCreate";
+import TableRowMenuItem from "./TableRowMenuItem";
 
 type Props = { category: TypeCategory };
 
@@ -64,7 +64,7 @@ export default function SingleCategory({ category }: Props) {
       </Grid>
 
       <Grid item xs={12}>
-        <MenuItemCreate />
+        <MenuItemCreate category={category} />
       </Grid>
 
       <Grid item xs={12}>

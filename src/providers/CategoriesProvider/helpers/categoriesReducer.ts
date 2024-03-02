@@ -15,6 +15,13 @@ export type TypeCategoriesAction =
       payload: { categoryNameToUpdate: string; updatedCategory: TypeCategory };
     }
   | {
+      type: "ADD_MENU_ITEM_TO_CATEGORY";
+      payload: {
+        categoryName: string;
+        menuItemToAdd: TypeCategory["menuItems"][number];
+      };
+    }
+  | {
       type: "RESTORE_DEFAULT_DATA";
     };
 
@@ -48,6 +55,20 @@ export default function categoriesReducer(
         ? action.payload.updatedCategory
         : category
     );
+  }
+
+  // add menu item to category
+  if (action.type === "ADD_MENU_ITEM_TO_CATEGORY") {
+    return state.map((category) => {
+      if (category.categoryName !== action.payload.categoryName) {
+        return category;
+      }
+
+      return {
+        ...category,
+        menuItems: [action.payload.menuItemToAdd, ...category.menuItems],
+      };
+    });
   }
 
   // restore default

@@ -1,13 +1,21 @@
 import useForm from "@/hooks/useForm";
 import { Button, Dialog, DialogContent, Grid, Typography } from "@mui/material";
-import { schemaMenuItemFormData } from "../MenuItemForm/schemaMenuItemFormData";
-import MenuItemForm from "../MenuItemForm";
+import { schemaMenuItemFormData } from "../../MenuItemForm/schemaMenuItemFormData";
+import MenuItemForm from "../../MenuItemForm";
+import { TypeCategory } from "@/providers/CategoriesProvider/categories";
+import doesMenuItemNameExistInCategory from "../../helpers/doesMenuItemNameExistInCategory";
+import { useSnackbar } from "notistack";
+import { useCategories } from "@/providers/CategoriesProvider/useCategories";
 
 type Props = {
+  category: TypeCategory;
   onClose: () => void;
 };
 
-export default function DialogMenuItemCreate({ onClose }: Props) {
+export default function DialogMenuItemCreate({ category, onClose }: Props) {
+  const snackbar = useSnackbar();
+  const { dispatch } = useCategories();
+
   const { formData, setFormData, getSubmitHandler, errors } = useForm({
     zodValidator: schemaMenuItemFormData,
     initialData: {
@@ -18,6 +26,35 @@ export default function DialogMenuItemCreate({ onClose }: Props) {
   });
 
   const onSubmit = getSubmitHandler(async (_formData) => {
+    const doesNameExist = doesMenuItemNameExistInCategory(
+      formData.menuItemName,
+      category
+    );
+
+    if (doesNameExist) {
+      snackbar.enqueueSnackbar("Menu item with this name already exists", {
+        variant: "error",
+      });
+
+      return { isSuccess: false };
+    }
+
+    dispatch({
+      type: "ADD_MENU_ITEM_TO_CATEGORY",
+      payload: {
+        categoryName: category.categoryName,
+        menuItemToAdd: {
+          description: formData.description,
+          menuItemName: formData.menuItemName,
+          price: formData.price ?? undefined,
+        },
+      },
+    });
+    snackbar.enqueueSnackbar(`New Menu item added: ${formData.menuItemName}`, {
+      variant: "success",
+    });
+    onClose();
+
     return { isSuccess: true };
   });
 

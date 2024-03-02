@@ -31,35 +31,36 @@ export default function DialogCategoryCreate({ onClose }: Props) {
 
   const isDisabled = !categoryName;
 
-  const handleCategoryCreate = () => {
-    const doesNameExist = doesCategoryNameExist(categoryName, categories);
-
-    if (doesNameExist) {
-      snackbar.enqueueSnackbar("Category with this name already exists", {
-        variant: "error",
-      });
-    } else {
-      dispatch({
-        type: "ADD-CATEGORY",
-        payload: {
-          categoryName,
-          categoryImgUrl,
-          menuItems: [],
-        },
-      });
-      snackbar.enqueueSnackbar(`New category created: ${categoryName}`, {
-        variant: "success",
-      });
-      onClose();
-      setQueryParams({ category: categoryName });
-    }
-  };
-
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isDisabled) {
-      handleCategoryCreate();
+
+    if (isDisabled) {
+      return null;
     }
+
+    const doesNameExist = doesCategoryNameExist(categoryName, categories);
+    if (doesNameExist) {
+      return snackbar.enqueueSnackbar(
+        "Category with this name already exists",
+        {
+          variant: "error",
+        }
+      );
+    }
+
+    dispatch({
+      type: "ADD-CATEGORY",
+      payload: {
+        categoryName,
+        categoryImgUrl,
+        menuItems: [],
+      },
+    });
+    snackbar.enqueueSnackbar(`New category created: ${categoryName}`, {
+      variant: "success",
+    });
+    onClose();
+    setQueryParams({ category: categoryName });
   };
 
   return (

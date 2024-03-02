@@ -2,10 +2,11 @@ import { AddRounded } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import DialogMenuItemCreate from "./DialogMenuItemCreate";
+import { TypeCategory } from "@/providers/CategoriesProvider/categories";
 
-type Props = {};
+type Props = { category: TypeCategory };
 
-export default function MenuItemCreate({}: Props) {
+export default function MenuItemCreate({ category }: Props) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
@@ -20,7 +21,10 @@ export default function MenuItemCreate({}: Props) {
       </Button>
 
       {isDialogOpen ? (
-        <DialogMenuItemCreate onClose={() => setIsDialogOpen(false)} />
+        <DialogMenuItemCreate
+          category={category}
+          onClose={() => setIsDialogOpen(false)}
+        />
       ) : null}
     </>
   );
