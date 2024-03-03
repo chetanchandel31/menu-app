@@ -3,6 +3,7 @@ import { LoadingButton } from "@mui/lab";
 import { Grid, TextField } from "@mui/material";
 import useLoginForm from "./useLogInForm";
 import FormFieldError from "@/components/FormFieldError";
+import { setAuthEmailToSessionStorage } from "../helpers/emailFromSessionStorage";
 
 type Props = {};
 
@@ -33,9 +34,10 @@ export default function LogInForm({}: Props) {
                 name="email"
                 label="Email"
                 type="email"
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, email: e.target.value }))
-                }
+                onChange={(e) => {
+                  setFormData((prev) => ({ ...prev, email: e.target.value }));
+                  setAuthEmailToSessionStorage(e.target.value);
+                }}
                 value={formData.email}
               />
 

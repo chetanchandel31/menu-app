@@ -2,6 +2,7 @@ import useForm from "@/hooks/useForm";
 import { useAuth } from "@/providers/AuthProvider/useAuth";
 import { useSnackbar } from "notistack";
 import { z } from "zod";
+import { getAuthEmailSessionStorage } from "../helpers/emailFromSessionStorage";
 
 type Params = {};
 
@@ -28,7 +29,7 @@ export default function useLoginForm({}: Params) {
   } = useForm({
     zodValidator: schemaLoginForm,
     initialData: {
-      email: "",
+      email: getAuthEmailSessionStorage(),
       password: "",
     },
   });

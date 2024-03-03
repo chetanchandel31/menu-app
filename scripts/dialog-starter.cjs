@@ -56,15 +56,15 @@ function getFileContent(dialogName) {
 function generateFile(dialogName) {
   const dirPath = path.join("./src", `${dialogName}`);
 
-  // Create the directory if it doesn't exist
+  // add dir
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath);
   }
 
-  // Specify the file path and name
+  // add file
   const filePath = path.join(dirPath, `index.tsx`);
 
-  // Write the file content to the file
+  // Write content to the file
   fs.writeFileSync(filePath, getFileContent(dialogName), "utf-8");
 
   console.log(`File generated successfully at: ${filePath}`);
