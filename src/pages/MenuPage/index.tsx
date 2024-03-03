@@ -7,6 +7,7 @@ import Filters from "./Filters";
 import useGetFilteredCategories from "./Filters/helpers/useGetFilteredCategories";
 import MenuItemsEmptyState from "./MenuItemsEmptyState";
 import SingleCategory from "./SingleCategory";
+import { Helmet } from "react-helmet";
 
 type Props = {};
 
@@ -37,38 +38,44 @@ export default function MenuPage({}: Props) {
   }
 
   return (
-    <Box
-      sx={{
-        backgroundImage: "url('/background.png')",
-        boxShadow: "inset 0 0 0 100vmax rgba(0,0,0,.5)",
-        height: "100vh",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "bottom",
-        overflow: "auto",
-      }}
-    >
-      <Header />
+    <>
+      <Helmet>
+        <title>Brand name | Menu</title>
+      </Helmet>
 
-      <Container maxWidth="md" sx={{ pb: 12, minHeight: "90vh" }}>
-        <Grid container spacing={5}>
-          <Grid item xs={12}>
-            <Box sx={{ py: 5 }}>
-              <BrandName />
-            </Box>
+      <Box
+        sx={{
+          backgroundImage: "url('/background.png')",
+          boxShadow: "inset 0 0 0 100vmax rgba(0,0,0,.5)",
+          height: "100vh",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom",
+          overflow: "auto",
+        }}
+      >
+        <Header />
+
+        <Container maxWidth="md" sx={{ pb: 12, minHeight: "90vh" }}>
+          <Grid container spacing={5}>
+            <Grid item xs={12}>
+              <Box sx={{ py: 5 }}>
+                <BrandName />
+              </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Filters />
+            </Grid>
+
+            <Grid item xs={12}>
+              {categories}
+            </Grid>
           </Grid>
+        </Container>
 
-          <Grid item xs={12}>
-            <Filters />
-          </Grid>
-
-          <Grid item xs={12}>
-            {categories}
-          </Grid>
-        </Grid>
-      </Container>
-
-      <Footer />
-    </Box>
+        <Footer />
+      </Box>
+    </>
   );
 }

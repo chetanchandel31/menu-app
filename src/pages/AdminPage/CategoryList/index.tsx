@@ -14,6 +14,7 @@ import {
 import CategoryCreate from "../CategoryCreate";
 import TableRowCategory from "./TableRowCategory";
 import HelperText from "@/components/HelperText";
+import { Helmet } from "react-helmet";
 
 type Props = {};
 
@@ -39,62 +40,68 @@ export default function CategoryList({}: Props) {
   }
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12}>
-        <Typography fontWeight={700} variant="h5">
-          Categories
-        </Typography>
+    <>
+      <Helmet>
+        <title>Admin | Categories</title>
+      </Helmet>
+
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Typography fontWeight={700} variant="h5">
+            Categories
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+          <CategoryCreate />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TableContainer component={Paper} variant="outlined">
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell width={"100%"}>
+                    <Typography
+                      color="text.secondary"
+                      fontWeight={700}
+                      variant="caption"
+                    >
+                      Category name
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell>
+                    <Typography
+                      color="text.secondary"
+                      fontWeight={700}
+                      variant="caption"
+                    >
+                      Items
+                    </Typography>
+                  </TableCell>
+
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>{rows}</TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button
+            onClick={() => {
+              dispatch({
+                type: "RESTORE_DEFAULT_DATA",
+              });
+            }}
+          >
+            Restore default data
+          </Button>
+        </Grid>
       </Grid>
-
-      <Grid item xs={12}>
-        <CategoryCreate />
-      </Grid>
-
-      <Grid item xs={12}>
-        <TableContainer component={Paper} variant="outlined">
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell width={"100%"}>
-                  <Typography
-                    color="text.secondary"
-                    fontWeight={700}
-                    variant="caption"
-                  >
-                    Category name
-                  </Typography>
-                </TableCell>
-
-                <TableCell>
-                  <Typography
-                    color="text.secondary"
-                    fontWeight={700}
-                    variant="caption"
-                  >
-                    Items
-                  </Typography>
-                </TableCell>
-
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>{rows}</TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Button
-          onClick={() => {
-            dispatch({
-              type: "RESTORE_DEFAULT_DATA",
-            });
-          }}
-        >
-          Restore default data
-        </Button>
-      </Grid>
-    </Grid>
+    </>
   );
 }

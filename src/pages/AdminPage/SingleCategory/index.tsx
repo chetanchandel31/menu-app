@@ -19,6 +19,7 @@ import CategoryOverview from "./CategoryOverview";
 import MenuItemCreate from "./MenuItemCreate";
 import TableRowMenuItem from "./TableRowMenuItem";
 import MenuItemEdit from "./MenuItemEdit";
+import { Helmet } from "react-helmet";
 
 type Props = { category: TypeCategory };
 
@@ -44,55 +45,61 @@ export default function SingleCategory({ category }: Props) {
   }
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Button
-          component={Link}
-          to={routes.admin.path}
-          size="small"
-          startIcon={<ArrowBackRounded />}
-        >
-          Categories
-        </Button>
-      </Grid>
+    <>
+      <Helmet>
+        <title>Admin | {category.categoryName}</title>
+      </Helmet>
 
-      <Grid item xs={12}>
-        <CategoryOverview category={category} />
-      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Button
+            component={Link}
+            to={routes.admin.path}
+            size="small"
+            startIcon={<ArrowBackRounded />}
+          >
+            Categories
+          </Button>
+        </Grid>
 
-      <Grid item xs={12}>
-        <Divider />
-      </Grid>
+        <Grid item xs={12}>
+          <CategoryOverview category={category} />
+        </Grid>
 
-      <Grid item xs={12}>
-        <MenuItemCreate category={category} />
-      </Grid>
+        <Grid item xs={12}>
+          <Divider />
+        </Grid>
 
-      <Grid item xs={12}>
-        <TableContainer component={Paper} variant="outlined">
-          <Table size="small">
-            <TableBody>{menuItemRows}</TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
+        <Grid item xs={12}>
+          <MenuItemCreate category={category} />
+        </Grid>
 
-      <Grid item xs={12}>
-        <Button
-          onClick={() => {
-            confirmCategoryDelete.onDelete({
-              categoryName: category.categoryName,
-            });
-          }}
-          size="small"
-          startIcon={<DeleteRounded />}
-          sx={{ my: 5 }}
-          variant="outlined"
-        >
-          Delete category
-        </Button>
-      </Grid>
+        <Grid item xs={12}>
+          <TableContainer component={Paper} variant="outlined">
+            <Table size="small">
+              <TableBody>{menuItemRows}</TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
 
-      <MenuItemEdit />
-    </Grid>
+        <Grid item xs={12}>
+          <Button
+            onClick={() => {
+              confirmCategoryDelete.onDelete({
+                categoryName: category.categoryName,
+              });
+            }}
+            size="small"
+            startIcon={<DeleteRounded />}
+            sx={{ my: 5 }}
+            variant="outlined"
+          >
+            Delete category
+          </Button>
+        </Grid>
+
+        <MenuItemEdit />
+      </Grid>
+    </>
   );
 }

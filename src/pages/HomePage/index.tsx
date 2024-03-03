@@ -6,6 +6,7 @@ import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
 import { blueGrey, grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 import BrandName from "../MenuPage/BrandName";
+import { Helmet } from "react-helmet";
 
 type Props = {};
 
@@ -14,6 +15,10 @@ export default function HomePage({}: Props) {
 
   return (
     <>
+      <Helmet>
+        <title>Brand name</title>
+      </Helmet>
+
       <Header />
 
       <Box
