@@ -10,7 +10,7 @@ export const schemaMenuItemFormData = z.object({
     .nullable(),
   description: z
     .string()
-    .min(5, { message: "Description should be of atleast 8 characters" }),
+    .min(8, { message: "Description should be of atleast 8 characters" }),
 });
 
 export type TypeMenuItemFormData = z.infer<typeof schemaMenuItemFormData>;
