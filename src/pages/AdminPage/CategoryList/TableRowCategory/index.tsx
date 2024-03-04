@@ -1,6 +1,6 @@
 import ThreeDotMenu from "@/components/ThreeDotMenu";
 import { TypeCategory } from "@/providers/CategoriesProvider/categories";
-import { Box, MenuItem, TableCell, TableRow, Typography } from "@mui/material";
+import { MenuItem, TableCell, TableRow, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import getCategoryUrl from "./getCategoryUrl";
 import useConfirmCategoryDelete from "./useConfirmCategoryDelete";
@@ -44,22 +44,22 @@ export default function TableRowCategory({ category, categoryIndex }: Props) {
         }}
       >
         <TableCell>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <DragHandleCategory handleRef={handleRef} />
+          <DragHandleCategory handleRef={handleRef} />
+        </TableCell>
 
-            <Typography
-              component={Link}
-              to={categoryUrl}
-              sx={{
-                textDecoration: "none",
-                color: "inherit",
-                display: "block",
-              }}
-              variant="body2"
-            >
-              {category.categoryName}
-            </Typography>
-          </Box>
+        <TableCell>
+          <Typography
+            component={Link}
+            to={categoryUrl}
+            sx={{
+              textDecoration: "none",
+              color: "inherit",
+              display: "block",
+            }}
+            variant="body2"
+          >
+            {category.categoryName}
+          </Typography>
         </TableCell>
 
         <TableCell align="center">

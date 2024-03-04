@@ -65,6 +65,8 @@ export default function CategoryList({}: Props) {
             <Table size="small">
               <TableHead>
                 <TableRow>
+                  <TableCell></TableCell>
+
                   <TableCell width={"100%"}>
                     <Typography
                       color="text.secondary"
