@@ -42,18 +42,19 @@ export default function Header({}: Props) {
         position: "sticky",
         top: 0,
         zIndex: 800,
+
+        minHeight: config.HEADER_MIN_HEIGHT,
+        display: "flex",
+        alignItems: "center",
+        px: 2,
+        borderBottom: `solid 1px ${theme.palette.divider}`,
       }}
     >
       <Box
         sx={{
-          minHeight: config.HEADER_MIN_HEIGHT,
           margin: "auto",
           width: "100%",
           maxWidth: config.HEADER_FOOTER_MAX_WIDTH,
-          display: "flex",
-          alignItems: "center",
-          px: 2,
-          borderBottom: `solid 1px ${theme.palette.divider}`,
         }}
       >
         {isMdDown ? (

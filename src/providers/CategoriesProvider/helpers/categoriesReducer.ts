@@ -78,7 +78,7 @@ export default function categoriesReducer(
     );
   }
 
-  // sort categories
+  // move categories
   if (action.type === "MOVE-CATEGORIES") {
     const updatedCategories = getDeepCopy(state);
 
@@ -145,7 +145,7 @@ export default function categoriesReducer(
     return updatedState;
   }
 
-  // sort menu items
+  // move menu items
   if (action.type === "MOVE-MENU-ITEMS") {
     const updatedCategories = getDeepCopy(state);
 
