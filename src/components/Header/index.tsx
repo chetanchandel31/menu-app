@@ -42,7 +42,6 @@ export default function Header({}: Props) {
         position: "sticky",
         top: 0,
         zIndex: 800,
-        borderBottom: `solid 1px ${theme.palette.divider}`,
       }}
     >
       <Box
@@ -54,6 +53,7 @@ export default function Header({}: Props) {
           display: "flex",
           alignItems: "center",
           px: 2,
+          borderBottom: `solid 1px ${theme.palette.divider}`,
         }}
       >
         {isMdDown ? (
