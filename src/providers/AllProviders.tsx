@@ -7,6 +7,12 @@ import { SnackbarProvider } from "notistack";
 import AuthProvider from "./AuthProvider";
 import { ConfirmProvider } from "material-ui-confirm";
 import CategoriesProvider from "./CategoriesProvider";
+import { TouchBackend } from "react-dnd-touch-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+import isTouchDevice from "@/utils/isTouchDevice";
+
+const backendForDND = isTouchDevice() ? TouchBackend : HTML5Backend;
 
 export default function AllProviders({ children }: { children: ReactNode }) {
   return (
@@ -36,7 +42,9 @@ export default function AllProviders({ children }: { children: ReactNode }) {
               }}
             >
               <AuthProvider>
-                <CategoriesProvider>{children}</CategoriesProvider>
+                <CategoriesProvider>
+                  <DndProvider backend={backendForDND}>{children}</DndProvider>
+                </CategoriesProvider>
               </AuthProvider>
             </ConfirmProvider>
           </MuiThemeProvider>

@@ -23,9 +23,13 @@ export default function CategoryList({}: Props) {
 
   const rows: React.ReactNode[] = [];
 
-  categories.forEach((category) => {
+  categories.forEach((category, i) => {
     rows.push(
-      <TableRowCategory category={category} key={category.categoryName} />
+      <TableRowCategory
+        category={category}
+        categoryIndex={i}
+        key={category.categoryName}
+      />
     );
   });
 

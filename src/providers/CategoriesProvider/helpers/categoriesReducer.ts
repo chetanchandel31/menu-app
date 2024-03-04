@@ -15,6 +15,7 @@ export type TypeCategoriesAction =
       type: "UPDATE-CATEGORY";
       payload: { categoryNameToUpdate: string; updatedCategory: TypeCategory };
     }
+  | { type: "MOVE-CATEGORIES"; payload: { fromIndex: number; toIndex: number } }
   | {
       type: "ADD_MENU_ITEM_TO_CATEGORY";
       payload: {
@@ -39,6 +40,10 @@ export type TypeCategoriesAction =
     }
   | {
       type: "RESTORE_DEFAULT_DATA";
+    }
+  | {
+      type: "MOVE-MENU-ITEMS";
+      payload: { categoryName: string; fromIndex: number; toIndex: number };
     };
 
 export default function categoriesReducer(
@@ -71,6 +76,21 @@ export default function categoriesReducer(
         ? action.payload.updatedCategory
         : category
     );
+  }
+
+  // sort categories
+  if (action.type === "MOVE-CATEGORIES") {
+    const updatedCategories = getDeepCopy(state);
+
+    const toValue = updatedCategories[action.payload.toIndex];
+    const fromValue = updatedCategories[action.payload.fromIndex];
+
+    if (toValue && fromValue) {
+      updatedCategories[action.payload.toIndex] = fromValue;
+      updatedCategories[action.payload.fromIndex] = toValue;
+    }
+
+    return updatedCategories;
   }
 
   // add menu item to category
@@ -123,6 +143,39 @@ export default function categoriesReducer(
     });
 
     return updatedState;
+  }
+
+  // sort menu items
+  if (action.type === "MOVE-MENU-ITEMS") {
+    const updatedCategories = getDeepCopy(state);
+
+    // go over all categories
+    for (
+      let categoryIndex = 0;
+      categoryIndex < updatedCategories.length;
+      categoryIndex++
+    ) {
+      const category = updatedCategories[categoryIndex];
+
+      // once found the category, swap menu items and break from loop
+      if (category && category?.categoryName === action.payload.categoryName) {
+        const menuItems = category?.menuItems || [];
+
+        const toValue = menuItems[action.payload.toIndex];
+        const fromValue = menuItems[action.payload.fromIndex];
+
+        if (toValue && fromValue) {
+          menuItems[action.payload.toIndex] = fromValue;
+          menuItems[action.payload.fromIndex] = toValue;
+        }
+
+        updatedCategories[categoryIndex] = { ...category, menuItems };
+
+        break;
+      }
+    }
+
+    return updatedCategories;
   }
 
   // restore default

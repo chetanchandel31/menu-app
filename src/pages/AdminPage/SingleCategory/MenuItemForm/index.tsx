@@ -72,7 +72,7 @@ export default function MenuItemForm({ errors, formData, setFormData }: Props) {
             checked={!isPriceBasedOnAvailability}
             control={<Radio />}
             label="Custom price"
-            onClick={() => setFormData((prev) => ({ ...prev, price: 1 }))}
+            onClick={() => setFormData((prev) => ({ ...prev, price: 0 }))}
           />
         </RadioGroup>
 

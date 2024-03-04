@@ -28,9 +28,14 @@ export default function SingleCategory({ category }: Props) {
 
   const menuItemRows: React.ReactNode[] = [];
 
-  category.menuItems.forEach((menuItem) => {
+  category.menuItems.forEach((menuItem, i) => {
     menuItemRows.push(
-      <TableRowMenuItem menuItem={menuItem} key={menuItem.menuItemName} />
+      <TableRowMenuItem
+        menuItem={menuItem}
+        menuItemIndex={i}
+        key={menuItem.menuItemName}
+        totalMenuItemsInCategory={category.menuItems.length}
+      />
     );
   });
 

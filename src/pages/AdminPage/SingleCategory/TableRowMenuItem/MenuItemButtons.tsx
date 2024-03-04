@@ -65,7 +65,7 @@ export default function MenuItemButtons({ menuItem }: Props) {
   };
 
   return (
-    <Grid container spacing={1} justifyContent={"end"}>
+    <Grid container spacing={1} justifyContent={"end"} wrap="nowrap">
       <Grid item>
         <Tooltip
           title="Edit menu item"
