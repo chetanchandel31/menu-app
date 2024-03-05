@@ -17,7 +17,7 @@ export default function HeaderMenuBtnMobile({ navItems }: Props) {
       </IconButton>
 
       <Drawer
-        anchor="right"
+        anchor="left"
         open={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
       >

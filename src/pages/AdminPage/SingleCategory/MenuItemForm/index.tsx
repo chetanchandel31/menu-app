@@ -78,6 +78,7 @@ export default function MenuItemForm({ errors, formData, setFormData }: Props) {
 
         {isPriceBasedOnAvailability ? null : (
           <TextField
+            autoFocus={formData.price === 0}
             name="menu-item-price"
             type="number"
             InputProps={{

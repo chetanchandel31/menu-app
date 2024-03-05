@@ -1,6 +1,5 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import useAppQueryParams from "@/hooks/useAppQueryParams";
 import { Box, Container, Grid } from "@mui/material";
 import BrandName from "./BrandName";
 import Filters from "./Filters";
@@ -12,24 +11,19 @@ import { Helmet } from "react-helmet";
 type Props = {};
 
 export default function MenuPage({}: Props) {
-  const [queryParams] = useAppQueryParams();
-  const searchQuery = queryParams["search-query"] || "";
-
   const filteredItems = useGetFilteredCategories();
 
   const categories: React.ReactNode[] = [];
 
   filteredItems.forEach((category, categoryIndex) => {
     categories.push(
-      <SingleCategory
-        key={category.categoryName}
-        category={category}
-        categoryIndex={categoryIndex}
-      />
+      <Grid key={category.categoryName} item xs={12}>
+        <SingleCategory category={category} categoryIndex={categoryIndex} />
+      </Grid>
     );
   });
 
-  if (searchQuery && categories.length === 0) {
+  if (categories.length === 0) {
     categories.push(
       <Grid item xs={12} key="empty-state">
         <MenuItemsEmptyState />
@@ -68,7 +62,7 @@ export default function MenuPage({}: Props) {
               <Filters />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid container item xs={12} spacing={3}>
               {categories}
             </Grid>
           </Grid>

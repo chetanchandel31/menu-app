@@ -8,7 +8,26 @@ type Props = {
 };
 
 export default function SingleCategory({ category, categoryIndex }: Props) {
-  if (category.menuItems.length === 0) return null;
+  let foodItems: React.ReactNode;
+  if (category.menuItems.length === 0) {
+    foodItems = (
+      <Grid item xs={12}>
+        <Typography sx={{ color: "#c2c2c2", py: 4 }} variant="body2">
+          No food-items in this category yet
+        </Typography>
+      </Grid>
+    );
+  } else {
+    foodItems = category.menuItems.map((menuItem) => (
+      <Grid key={menuItem.menuItemName} item xs={12}>
+        <FoodMenuItem
+          description={menuItem.description}
+          name={menuItem.menuItemName}
+          price={menuItem.price}
+        />
+      </Grid>
+    ));
+  }
 
   return (
     <Grid
@@ -34,15 +53,7 @@ export default function SingleCategory({ category, categoryIndex }: Props) {
             </Typography>
           </Grid>
 
-          {category.menuItems.map((menuItem) => (
-            <Grid key={menuItem.menuItemName} item xs={12}>
-              <FoodMenuItem
-                description={menuItem.description}
-                name={menuItem.menuItemName}
-                price={menuItem.price}
-              />
-            </Grid>
-          ))}
+          {foodItems}
         </Grid>
       </Grid>
 

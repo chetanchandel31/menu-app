@@ -8,7 +8,7 @@ export default function MenuItemsEmptyState({}: Props) {
   const [queryParams] = useAppQueryParams();
   const searchQuery = queryParams["search-query"] || "";
 
-  return (
+  return searchQuery ? (
     <Typography
       component={"div"}
       sx={{
@@ -27,6 +27,20 @@ export default function MenuItemsEmptyState({}: Props) {
         Our search gremlins couldn't find anything for{" "}
         <strong>{searchQuery}</strong>. How about trying something else?
       </div>
+    </Typography>
+  ) : (
+    <Typography
+      component={"div"}
+      sx={{
+        color: "#fff",
+        textAlign: "center",
+        py: 5,
+        maxWidth: 600,
+        margin: "auto",
+      }}
+      variant="body2"
+    >
+      No items available at the moment
     </Typography>
   );
 }

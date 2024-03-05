@@ -43,7 +43,7 @@ export default function TableRowCategory({ category, categoryIndex }: Props) {
           }
         }}
       >
-        <TableCell>
+        <TableCell onClick={(e) => e.stopPropagation()}>
           <DragHandleCategory handleRef={handleRef} />
         </TableCell>
 
